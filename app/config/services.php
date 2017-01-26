@@ -55,6 +55,29 @@ $di->setShared('view', function () use ($config) {
     return $view;
 });
 
+
+/*
+ * add the smarty engine
+ */
+/* $di->setShared('view', function () use ($config) {
+     '.tpl' =>  function ($view, $di) use ($config) {
+        $smarty = new Smarty($view, $di);
+
+        $smarty->setTemplateDir($view->getViewsDir());
+        //$smarty->setCompileDir( '../app/viewscompiled' );
+        $smarty->error_reporting = error_reporting() ^ E_NOTICE;
+        $smarty->escape_html = true;
+        $smarty->_file_perms = 0666;
+        $smarty->_dir_perms = 0777;
+        $smarty->force_compile = false;
+        $smarty->compile_check = true;
+        $smarty->caching = false;
+        $smarty->debugging = true;
+
+        return $smarty;
+    }
+});
+*/
 /**
  * Database connection is created based in the parameters defined in the configuration file
  */

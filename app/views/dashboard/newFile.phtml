@@ -1,0 +1,80 @@
+<div class="contain">
+    <h4>Mes fichiers</h4>
+    <div class="clearfix">&nbsp;</div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <span  data-toggle="collapse" data-target="#demo1" style="cursor: alias;"><a href="#"><i class="fa fa-plus"></i> Ajouter un/des fichier(s)</a></span>
+
+        </div>
+        <div id="demo1" class="collapse col-md-12">
+            <span class="clearfix">&nbsp;</span>
+            <div class="col-md-12">
+                <table class="table table-responsive">
+                    <tr>
+                        <td colspan="4">
+                            <span class="col-md-6"><input type="text" class="form-control" placeholder="description fichier"></span>
+                            <span class="col-md-4"><input type="file" name="fichier[]"></span>
+                            <span class="col-md-2">
+                                <button type="button" class="btn btn-success btn-xs" onclick="addDoc()" >
+                                    <i class="fa fa-plus"></i> &nbsp;Nouveau
+                                </button>
+                            </span><br>
+
+                        </td>
+                    </tr>                               
+                </table> 
+                <table class="table table-responsive"id="tableau_doc" >
+                    <tr>
+                        <td colspan="4">
+                        </td>
+                    </tr>
+                </table>
+
+            </div>  
+        </div>
+    </div>
+    <div class="clearfix">&nbsp;</div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-responsive table-striped">
+                <tr class="table-striped">
+                    <td> </td>
+                    <td><b>N&deg;</b></td>
+                    <td><b>Nom fichier</b></td>
+                    <td align="center"><b>details</b></td>
+                    <td align="center"><b>Taille</b></td>
+                    <td align="center"><b>T&eacute;l&eacute;charger</b></td>
+                    <td align="center"><b>supprimer</b></td>
+                </tr>
+                <tr class="table-striped">
+                    <td><img src="../public/img/fich.jpg" width="25" height="25"></td>
+                    <td><b>1</b></td>
+                    <td>mon cv</td>
+                     <td align="center">pdf</td>
+                     <td align="center">110 ko</td>
+                    <td align="center"><a href="#"><span class="glyphicon glyphicon-cloud-download text-primary"></span></a></td>
+                    <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
+                </tr>
+                <tr class="table-striped">
+                    <td><img src="../public/img/fich.jpg" width="25" height="25"></td>
+                    <td><b>2</b></td>
+                    <td>mon parcour universitaire</td>
+                     <td align="center">xls</td>
+                     <td align="center">110 ko</td>
+                    <td align="center"><a href="#"><span class="glyphicon glyphicon-cloud-download text-primary"></span></a></td>
+                    <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
+                </tr>
+                <tr class="table-striped">
+                    <td><img src="../public/img/fich.jpg" width="25" height="25"></td>
+                    <td><b>3</b></td>
+                    <td>dossier soneb</td>
+                     <td align="center">xls</td>
+                     <td align="center">110 ko</td>
+                    <td align="center"><a href="#"><span class="glyphicon glyphicon-cloud-download text-primary"></span></a></td>
+                    <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

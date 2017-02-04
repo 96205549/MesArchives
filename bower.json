@@ -1,10 +1,7 @@
 {
-  "name": "mes_archives",
-  "description": "mes archives",
-  "main": "",
-  "authors": [
-    "joezer bouraima"
-  ],
+  "name": "bouraima",
+  "description": "chargement des plugins js",
+  "main": "archives",
   "license": "MIT",
   "homepage": "",
   "private": true,
@@ -14,5 +11,12 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "bootstrap-datepicker": "^1.6.4",
+    "font-awesome": "^4.7.0",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1",
+    "bs-glyphicon": "^1.0.8"
+  }
 }

@@ -1,0 +1,80 @@
+<div class="contain">
+    <h3>Nouveau dossier</h3>
+
+    <div class="row">
+        <div class="col-md-3">
+            <span><img src="../public/img/folder.jpg"></span><br>
+            <input type="text" class="form-control" placeholder="Nom du dossier"><br>
+
+            <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check btn-primary"></i> Enregistrer </button>
+            <span>&nbsp;</span>
+            <button type="reset" class="btn btn-default btn-sm">Annuler </button>
+
+        </div>
+
+        <div style="float: left; border: 1px solid #ccc; height: 250px;"></div>
+
+        <div class="col-md-8">
+            <table class="table table-responsive">
+                <tr>
+                    <td colspan="4">
+                        <span class="col-md-6"><input type="text" class="form-control" placeholder="description fichier"></span>
+                        <span class="col-md-4"><input type="file" name="fichier[]"></span>
+                        <span class="col-md-2">
+                            <button type="button" class="btn btn-success btn-xs" onclick="addDoc()" >
+                                <i class="fa fa-plus"></i> &nbsp;Nouveau
+                            </button>
+                        </span><br>
+
+                    </td>
+                </tr>                               
+            </table> 
+            <table class="table table-responsive"id="tableau_doc" >
+                <tr>
+                    <td colspan="4">
+                    </td>
+                </tr>
+            </table>
+            <!--div>
+                <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check btn-primary"></i> Enregistrer </button>
+                <span>&nbsp;</span>
+                <button type="reset" class="btn btn-default btn-sm">Annuler </button>
+            </div-->
+        </div>        
+    </div>
+    <div class="clearfix">&nbsp;</div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-responsive table-striped">
+                <tr class="table-striped">
+                    <td> </td>
+                    <td><b>N&deg;</b></td>
+                    <td><b>Nom dossier</b></td>
+                    <td><b>details</b></td>
+                    <td><b>supprimer</b></td>
+                </tr>
+                <tr class="table-striped">
+                    <td><img src="../public/img/folder.jpg" width="20" height="20"></td>
+                    <td><b>1</b></td>
+                    <td>mon cv</td>
+                    <td>---</td>
+                    <td>x</td>
+                </tr>
+                <tr class="table-striped">
+                    <td><img src="../public/img/folder.jpg" width="20" height="20"></td>
+                    <td><b>2</b></td>
+                    <td>mon parcour universitaire</td>
+                    <td>---</td>
+                    <td>x</td>
+                </tr>
+                <tr class="table-striped">
+                    <td><img src="../public/img/folder.jpg" width="20" height="20"></td>
+                    <td><b>3</b></td>
+                    <td>dossier soneb</td>
+                    <td>---</td>
+                    <td>x</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -13,7 +13,8 @@ class DashboardController extends Controller
     
     public function indexAction()
     {
-        "<h1>hello</h1>";     
+        "<h1>hello</h1>";   
+        
     }
     /*
      * gestion des contacts
@@ -66,7 +67,7 @@ class DashboardController extends Controller
     
     public function newFolderAction()
     {
-        "<h1>hello</h1>";     
+           
     }
     public function mesFoldersAction()
     {
@@ -80,7 +81,17 @@ class DashboardController extends Controller
     {
         "<h1>hello</h1>";     
     }
-    public function mesFilesAction()
+    /*
+     * gestion des utilisateurs
+     */
+    public function newUserAction()
+    {
+        "<h1>hello</h1>";     
+    }
+    /*
+     * gestions des profiles
+     */
+    public function newProfileAction()
     {
         "<h1>hello</h1>";     
     }

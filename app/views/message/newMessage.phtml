@@ -1,0 +1,123 @@
+<?php
+if (!isset($models)) {
+    $models = [];
+}
+?>
+<div class="contain">
+    <h3>Nouveau message</h3>
+    <div class="clearfix">&nbsp;</div>
+
+    <div class="row">
+        <div class="col-md-12 row">
+            <?php if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+                <div><p><?php $this->flashSession->output() ?></p></div>
+            <?php endif; ?>
+        </div>
+        <div class="col-md-12">
+            <form method="post" action="newMessage">
+                <div class="row">
+                    <span class="col-md-2">Exp&eacute;diteur</span>
+                    <span class="col-md-10">
+                        <input type="text" class="form-control" maxlength="11" name="expediteur">
+                    </span>
+                </div>
+                <div class="clearfix">&nbsp;</div>
+                <div class="row">
+                    <span class="col-md-2">Destinataire(s)</span>
+                    <span class="col-md-10">
+                        <span class="">
+                            <input type="text" class="form-control" id="destinataire" name="destinataire">
+                            <!--span><button type="button" class="btn btn-info btn-sm " data-toggle="modal" data-target="#myModal">Contact</button></span-->
+                        </span><br>
+                        <span class="text-info">
+                            Vous pouvez saisir plusieurs num&eacute;ros s&eacute;par&eacute;s par un point-virgule (;)
+                        </span>
+                    </span>
+                </div>
+                <div class="clearfix">&nbsp;</div>
+                <div class="row">
+                    <span class="col-md-2">&nbsp;</span>
+                    <span class="col-md-10">
+                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Model de message</button>
+                    </span>
+                </div>
+                <div class="clearfix">&nbsp;</div>
+                <div class="row">
+                    <span class="col-md-2">&nbsp;</span>
+                    <span class="col-md-10">
+                        <textarea rows="10" id="message" class="form-control ckeditor" name="message"></textarea>
+                    </span>
+                    <span class="clearfix">&nbsp;</span>
+                    <span class="col-md-2">
+                        &nbsp;
+                    </span>
+                    <span class="col-md-10">
+                        <button type="submit"  name="submit" class="btn btn-default"><i class="fa fa-send "></i> &nbsp; Envoyer</button>
+                    </span>
+                </div>
+
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-9 col-sm-offset-2">
+                        <div class="checkbox checkbox-primary">
+                            <input id="saveas"  name="modelesms" value='1' type="checkbox" <?php //echo (isset($saveas) && $saveas == true) ? "checked='checked'" : "";       ?>>
+                            <label for="saveas" class="text-primary">
+                                Sauvegarder ce message en tant que mod&egrave;le
+                            </label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="sendcopy" name="sendme" value='1' type="checkbox" <?php //echo (isset($sendcopy) && $sendcopy == true) ? "checked='checked'" : "";       ?>>
+                            <label for="sendcopy" class="text-primary">
+                                M&apos;envoyer une copie de ce message
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+
+
+            <!---code d'affichage d'un popup -->
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Mod&egrave;le de message</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table-responsive table-triped">
+                                <?php foreach ($models as $model): ?>
+                                    <tr class="table-responsive table-hover table-striped">
+                                        <td> &nbsp; <?= $model->sms ?></td>
+                                        <td> &nbsp; 
+                                            <a href="#" class="inserer btn btn-info btn-xs" id="<?= $model->idsms; ?>" name="<?= $model->sms ?>"  role="button">
+                                                <span class ="fa fa-check"></span> Ins&eacute;rer
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr><td> &nbsp;</td><td> &nbsp;</td></tr>
+                                <?php endforeach; ?>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Valider</button>
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Fermer</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!---fin du code -->
+
+
+
+
+
+        </div>
+    </div>
+</div>

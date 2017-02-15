@@ -1,0 +1,150 @@
+<?php
+if (!isset($groupes)) {
+    $groupes = [];
+}
+
+?>
+<div class="contain">
+    <h4>Nouveau contact</h4>
+    <div class="clearfix">&nbsp;</div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <span class="col-md-3" data-toggle="collapse" data-target="#demo1" style="cursor: alias;"><a href="#"><i class="fa fa-plus"></i> Cr&eacute;er un groupe de contact</a></span>
+            <span class="col-md-offset-4 col-md-4" ><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-users"></i> Mes groupes de contact</a></span>
+        </div>
+        <div id="demo1" class="collapse col-md-12">
+            <span class="clearfix">&nbsp;</span>
+            <div class="col-md-12">
+                <form method="post" id="newGroupe" action="newGroupe">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td colspan="4">
+                                <span class="col-md-4"><input type="text" class="form-control" id="nomgroupe" placeholder="Nom du groupe" name="nomgroupe"></span>
+                                <span class="col-md-2">
+                                    <button type="submit" class="btn btn-primary btn-sm" >
+                                        <i class="fa fa-check"></i> &nbsp;Enregistrer
+                                    </button>
+                                </span><br>
+
+                            </td>
+                        </tr>                               
+                    </table> 
+                </form>
+            </div>  
+        </div>
+    </div>
+    <div class="clearfix">&nbsp;</div>
+    <div class="col-md-12 row notification">
+        <?php if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+            <div><p><?php $this->flashSession->output() ?></p></div>
+        <?php endif; ?>
+    </div>
+    <div class="row">      
+        <span class="clearfix">&nbsp;</span>
+        <div class="col-md-12">
+            <form action="newContact" method="post">
+                <table class="table table-responsive">
+
+                    <tr>
+                        <td>
+                            <span class="col-md-8">
+                                <p ><span class="fa fa-user"></span><input type="text" class="form-control" placeholder="Nom et prenom" name="fulname"></p>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>   
+                            <span class="col-md-8"><p ><span class="fa fa-phone"></span><input type="text" class="form-control" name="phone" placeholder="mobile"></p>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>  
+                            <span class="col-md-8">
+                                <p ><span class="fa fa-envelope"></span><input type="text" class="form-control" name="email" placeholder="email"></p>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="col-md-8">
+                                <p ><span class="fa fa-users"></span> 
+                                    <select class="form-control select-goup" name="groupe">
+                                        <?php foreach ($groupes as $value): ?>
+                                            <option value="<?= $value->idgroupe ?>"><?= $value->nomgroupe ?></option>
+                                        <?php endforeach; ?>
+
+                                    </select></p>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>  
+                            <span class="col-md-6">
+                                <button type="submit" class="btn btn-success btn-sm" >
+                                    <i class="fa fa-check"></i> &nbsp;Enregistrer
+                                </button>
+                            </span><br>
+                        </td>
+                    </tr>
+
+                    </td>
+                    </tr>                               
+                </table> 
+            </form>
+        </div>        
+    </div>
+    <div class="clearfix">&nbsp;</div>
+
+
+
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-info">Groupe de contact</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row bloc-edit-group">
+                        <span class="col-md-9"> <input type="text" id="groupname" name="groupname" class="form-control"></span>
+                        <span class="col-md-3"> <button class="btn btn-default"><i class="fa fa-pencil"></i>&nbsp;modifier</button></span>
+                    </div>
+                     <div class="clearfix">&nbsp;</div>
+                    <div class="row col-md-12 scroll-modal">
+                        <div class="clearfix">&nbsp;</div>
+
+                        <div class="clearfix">&nbsp;</div>
+                        <table class="table-responsive table-striped col-md-12 tabl-groupe">
+                            <?php foreach ($groupes as $groupe): ?>
+                                <tr class="table-responsive table-striped">
+                                    <td class="col-md-8">
+                                        <?= $groupe->nomgroupe ?></td>
+                                    <td class="col-md-2">
+                                        <a href="#" class="btn btn-sm btn-default"><i class="fa fa-pencil"></i>&nbsp;modifier</a>
+                                    </td>
+                                    <td class="col-md-2">
+                                        <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i>&nbsp; supprimer</a>
+                                    </td>
+                                </tr>  
+                                <tr><td colspan="3">&nbsp;</td></tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!--button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Valider</button-->
+                    <!--button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Fermer</button-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+

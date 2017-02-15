@@ -1,3 +1,101 @@
 <div class="contain">
-    <h3>dasboard</h3>
+    <h5 class="text-primary"><u>Dasboard/ Plateforme electronique des archives</u></h5>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div>&nbsp;</div>
+            <div class="col-md-offset-1 col-md-3 cercle">
+                <h4 class="text-primary">Dossier</h4><br>
+                <img src="../public/img/dos.png" width="40%" height="40%"><br>
+                <b class="text-warning">Utilisations des donn&eacute;es</b><br><br>
+                <b class="text-info">105 dossier(s)</b>
+            </div>
+
+            <div class="col-md-offset-1 col-md-3 cercle">
+                <h4 class="text-primary">fichier</h4><br>
+                <img src="../public/img/file.png" width="40%" height="40%"><br>
+                <b class="text-warning">Utilisations des donn&eacute;es</b><br><br>
+                <b class="text-info">1004 fichier(s)</b>
+            </div>
+            <div class="col-md-offset-1 col-md-3 cercle">
+                <h4 class="text-primary">archives</h4><br>
+                <img src="../public/img/zip.png" width="40%" height="40%"><br>
+                <b class="text-warning">Utilisations des donn&eacute;es</b><br><br>
+                <b class="text-info">40 archive(s)</b>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix">&nbsp;</div>
+    <div class="clearfix">&nbsp;</div>
+    <div class="row">
+        <div class="col-md-6">           
+            <div class="panel panel-transparent">
+                <div class="panel-body no-padding">
+                    <div id="portlet-circular-minimal" class="panel panel-default">
+                        <div class="panel-heading ">
+                            <div class="panel-title">Portlet Title
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3>
+                                <span class="semi-bold">Minimal</span> Portlet</h3>
+                            <p>
+                                
+                                modifier===><?= $this->session->get('mod') ?><br>
+                                supprimer===><?= $this->session->get('sup') ?><br>
+                                telecharger===><?= $this->session->get('telech') ?><br>
+                                sms===><?= $this->session->get('sms') ?><br>
+                                systeme===><?= $this->session->get('systeme') ?><br>
+                                corbeille===><?= $this->session->get('corbeille') ?><br>
+                                permission===><?= $this->session->get('permission') ?><br>
+                               
+                                Click on the refresh icon to simulate an AJAX call and to see an animated circular progress indicatorabove the portlet. This is the Pages default progress indicator for portlets. Don't like this style? Simply change the style by setting portlet options.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-5">
+            <div class="panel panel-transparent">
+                <div class="panel panel-warning no-padding">
+                    <div class="panel-heading">Activit&eacute;es r&eacute;centes</div>
+                    <div class="panel-body">
+                        <table class="table table-responsive table-striped">
+                            <tr class="table table-striped">
+                                <td>cr&eacute;ation du dossier impot 2008</td>
+                            </tr>
+                            <tr class="table table-striped">
+                                <td>cr&eacute;ation du dossier impot 2009</td>
+                            </tr>
+                            <tr class="table table-striped">
+                                <td>cr&eacute;ation du dossier impot 2010</td>
+                            </tr>
+                            <tr class="table table-striped">
+                                <td>cr&eacute;ation du dossier impot 2011</td>
+                            </tr>
+                            <tr class="table table-striped">
+                                <td>cr&eacute;ation du dossier impot 2012</td>
+                            </tr>
+                            <tr class="table table-striped">
+                                <td>cr&eacute;ation du dossier impot 2013</td>
+                            </tr>
+                            <tr class="table table-striped">
+                                <td>cr&eacute;ation du dossier impot 2014</td>
+                            </tr>
+                            <tr class="table table-striped">
+                                <td>cr&eacute;ation du dossier impot 2015</td>
+                            </tr>
+                            <tr class="table table-striped">
+                                <td>cr&eacute;ation du dossier impot 2016</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

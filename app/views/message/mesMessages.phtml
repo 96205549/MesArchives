@@ -1,0 +1,93 @@
+<?php
+if (!isset($messages)) {
+    $messages = [];
+}
+
+?>
+<div class="contain">
+    <div class="clearfix">
+        &nbsp;
+    </div>
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="row">
+                    <span class="col-md-12 text-info">
+                        <h3>Log des envois de messages sms</h3>
+                    </span>
+                  
+                </div>
+                <div class="clearfix">&nbsp;</div>
+                <div class="ibox-content">
+                    <div class="row m-b-sm m-t-sm">
+                        <form  method="post" action="<?php $this->url->get(''); ?>">
+                            <div class="col-md-2">
+                                <a href="" role="button" id="loading-example-btn" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> Refresh</a>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <input type="text" placeholder="Search" name="searchtext" class="input-sm form-control" value="<?php //echo isset($searchText) ? (string) $searchText : null; ?>"> 
+                                    <span class="input-group-btn">
+                                        <button type="submit" name="go" class="btn btn-sm btn-primary"> Go!</button> 
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="row table-responsive">
+                        <table class="table table-striped table-bordered table-hover dataTables-example table responsive" >
+                            <thead>
+                                <tr>
+                                    <th>De (exp&eacute;diteur)</th>
+                                    <th>&Agrave; (destinataire)</th>
+                                    <th>Message</th>
+                                    <th>Ajout&eacute; le</th>
+                                    <th>Envoy&eacute; le</th>
+                                    <th>Statut</th>
+                                    <th>D&eacute;livr&eacute; le</th>
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($messages as $message): ?>
+                                    <tr class="gradeX">
+                                        <td><?= $message->expediteur ?></td>
+                                        <td><?= $message->destinataire ?></td>
+                                        <td><?= $message->message ?></td>
+                                        <td><?= date("d-m-y",$message->date) ?></td>
+                                        <td><?= date("d-m-y",$message->date) ?></td>
+                                        <td class="center"><?= $message->status ?></td>
+                                        <td class="center">
+                                           <?= date("d-m-y",$message->date) ?>
+                                        </td>
+                                      
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>De (exp&eacute;diteur)</th>
+                                    <th>&Agrave; (destinataire)</th>
+                                    <th>Message</th>
+                                    <th>Ajout&eacute; le</th>
+                                    <th>Envoy&eacute; le</th>
+                                    <th>Statut</th>
+                                    <th>D&eacute;livr&eacute; le</th>
+                                    
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</div>

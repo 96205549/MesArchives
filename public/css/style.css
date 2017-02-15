@@ -18,3 +18,18 @@
 /*.fixed { 
         position: fixed;      
 }*/
+
+
+.cercle{
+    
+    height: 250px;
+    /*background-color:gansboro;*/
+    text-align: center;
+    border:1px solid #ccc;
+    border-radius:150px; 
+}
+
+.scroll-modal{
+    height: 500px; 
+    overflow-y:scroll;
+}

@@ -20,8 +20,8 @@
                     <td colspan="4">
                         <span class="col-md-6"><input type="text" class="form-control" placeholder="description fichier"></span>
                         <span class="col-md-4"><input type="file" name="fichier[]"></span>
-                        <span class="col-md-2">
-                            <button type="button" class="btn btn-success btn-xs" onclick="addDoc()" >
+                        <span class="col-md-2" id="bloc-button">
+                            <button type="button" class="btn btn-success btn-xs" onclick="addDoc()" id="addDoc" >
                                 <i class="fa fa-plus"></i> &nbsp;Nouveau
                             </button>
                         </span><br>
@@ -50,29 +50,33 @@
                     <td> </td>
                     <td><b>N&deg;</b></td>
                     <td><b>Nom dossier</b></td>
-                    <td><b>details</b></td>
-                    <td><b>supprimer</b></td>
+                    <td><b>file(s)</b></td>
+                    <td align='center'><b>ouvrir</b></td>
+                    <td align='center'><b>supprimer</b></td>
                 </tr>
                 <tr class="table-striped">
                     <td><img src="../public/img/folder.jpg" width="20" height="20"></td>
                     <td><b>1</b></td>
                     <td>mon cv</td>
-                    <td>---</td>
-                    <td>x</td>
+                    <td>(05)</td>
+                    <td align="center"><a href="#"><span class="glyphicon glyphicon-eye-open text-primary"></span></a></td>
+                    <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
                 </tr>
                 <tr class="table-striped">
                     <td><img src="../public/img/folder.jpg" width="20" height="20"></td>
                     <td><b>2</b></td>
                     <td>mon parcour universitaire</td>
-                    <td>---</td>
-                    <td>x</td>
+                    <td>(08)</td>
+                    <td align="center"><a href="#"><span class="glyphicon glyphicon-eye-open text-primary"></span></a></td>
+                    <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
                 </tr>
                 <tr class="table-striped">
                     <td><img src="../public/img/folder.jpg" width="20" height="20"></td>
                     <td><b>3</b></td>
                     <td>dossier soneb</td>
-                    <td>---</td>
-                    <td>x</td>
+                    <td>(15)</td>
+                    <td align="center"><a href="#"><span class="glyphicon glyphicon-eye-open text-primary"></span></a></td>
+                    <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
                 </tr>
             </table>
         </div>

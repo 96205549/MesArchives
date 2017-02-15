@@ -1,10 +1,10 @@
 <div class="contain">
-    <h4>Mes fichiers</h4>
+    <h4>Mes archives</h4>
     <div class="clearfix">&nbsp;</div>
 
     <div class="row">
         <div class="col-md-12">
-            <span  data-toggle="collapse" data-target="#demo1" style="cursor: alias;"><a href="#"><i class="fa fa-plus"></i> Ajouter un/des fichier(s)</a></span>
+            <span  data-toggle="collapse" data-target="#demo1" style="cursor: alias;"><a href="#"><i class="fa fa-plus"></i> Ajouter un/des archive(s)</a></span>
 
         </div>
         <div id="demo1" class="collapse col-md-12">
@@ -15,8 +15,8 @@
                         <td colspan="4">
                             <span class="col-md-6"><input type="text" class="form-control" placeholder="description fichier"></span>
                             <span class="col-md-4"><input type="file" name="fichier[]"></span>
-                            <span class="col-md-2">
-                                <button type="button" class="btn btn-success btn-xs" onclick="addDoc()" >
+                            <span class="col-md-2" id="bloc-button">
+                                <button type="button" class="btn btn-success btn-xs" onclick="addDoc()" id="addDoc" >
                                     <i class="fa fa-plus"></i> &nbsp;Nouveau
                                 </button>
                             </span><br>
@@ -31,7 +31,15 @@
                     </tr>
                 </table>
 
-            </div>  
+            </div>
+             <div class="row">
+                <span class="col-md-10">
+                    &nbsp;
+                </span>
+                <span class="col-md-2">
+                    <button class="btn btn-primary fa fa-check " type="submit" >&nbsp;Enregistrer</button>
+                </span>
+            </div>
         </div>
     </div>
     <div class="clearfix">&nbsp;</div>
@@ -48,29 +56,29 @@
                     <td align="center"><b>supprimer</b></td>
                 </tr>
                 <tr class="table-striped">
-                    <td><img src="../public/img/fich.jpg" width="25" height="25"></td>
+                    <td><img src="../public/img/zipe.jpg" width="25" height="25"></td>
                     <td><b>1</b></td>
                     <td>mon cv</td>
-                     <td align="center">pdf</td>
-                     <td align="center">110 ko</td>
+                    <td align="center">jpg</td>
+                    <td align="center">10 ko</td>
                     <td align="center"><a href="#"><span class="glyphicon glyphicon-cloud-download text-primary"></span></a></td>
                     <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
                 </tr>
                 <tr class="table-striped">
-                    <td><img src="../public/img/fich.jpg" width="25" height="25"></td>
+                    <td><img src="../public/img/zipe.jpg" width="25" height="25"></td>
                     <td><b>2</b></td>
                     <td>mon parcour universitaire</td>
-                     <td align="center">xls</td>
-                     <td align="center">110 ko</td>
+                    <td align="center">pdf</td>
+                    <td align="center">110 ko</td>
                     <td align="center"><a href="#"><span class="glyphicon glyphicon-cloud-download text-primary"></span></a></td>
                     <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
                 </tr>
                 <tr class="table-striped">
-                    <td><img src="../public/img/fich.jpg" width="25" height="25"></td>
+                    <td><img src="../public/img/zipe.jpg" width="25" height="25"></td>
                     <td><b>3</b></td>
                     <td>dossier soneb</td>
-                     <td align="center">xls</td>
-                     <td align="center">110 ko</td>
+                    <td align="center">xls</td>
+                    <td align="center">110 ko</td>
                     <td align="center"><a href="#"><span class="glyphicon glyphicon-cloud-download text-primary"></span></a></td>
                     <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
                 </tr>

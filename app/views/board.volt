@@ -27,13 +27,13 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-                        <span class="glyphicon glyphicon-user"></span> Joezer <i class="fa fa-caret-down"></i></a>
+                        <span class="glyphicon glyphicon-user"></span> <?= $this->session->get('pseudo');  ?>&nbsp;<i class="fa fa-caret-down"></i></a>
                         <ul class="dropdown-menu sous-menu" role="menu">
                             <li>
                                 <a href="#">&nbsp; Mon profile</a>
                             </li> 
                             <li>
-                                <a href="<?= $this->url->get(" "); ?>">&nbsp; D&eacute;connexion</a>
+                                <a href="<?= $this->url->get("session/logout"); ?>">&nbsp; D&eacute;connexion</a>
                             </li>                    
                         </ul>
                     </li>
@@ -50,21 +50,30 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close">
+                            <a  href="<?= $this->url->get("dashboard/index"); ?>"><span class="glyphicon glyphicon-home text-primary">
+                            </span> Dashboard</a>
+                        </h4>
+                    </div>
+                    
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close text-warning">
                             </span> Dossier</a>
                         </h4>
                     </div>
-                    <div id="collapseOne" class="panel-collapse collapse in">
+                    <div id="collapseOne" class="panel-collapse collapse ">
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-folder-open"></span> <a href="<?= $this->url->get("dashboard/newFolder"); ?>"> Cr&eacute;er un dossier</a>
+                                        <span class="glyphicon glyphicon-folder-open"></span> <a href="<?= $this->url->get("folder/newFolder"); ?>"> Cr&eacute;er un dossier</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-folder-close"></span> <a href="<?= $this->url->get("dashboard/mesFolders"); ?>"> Mes dossiers</a>
+                                        <span class="glyphicon glyphicon-folder-close"></span> <a href="<?= $this->url->get("folder/mesFolders"); ?>"> Mes dossiers</a>
                                     </td>
                                 </tr>
                                 
@@ -75,51 +84,20 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a href="<?= $this->url->get("dashboard/newFile"); ?>"><span class="glyphicon glyphicon-file">
+                            <a href="<?= $this->url->get("file/newFile"); ?>"><span class="glyphicon glyphicon-file">
                             </span> Fichiers </a>
                         </h4>
                     </div>
-                    <!--div id="collapseTwo" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                       <span class="glyphicon glyphicon-save-file"></span> <a href="<?= $this->url->get("dashboard/newFile"); ?>">Cr&eacute;er un fichier</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <span class="glyphicon glyphicon-open-file"></span> <a href="<?= $this->url->get("dashboard/mesFiles"); ?>"></span>Mes fichiers</a>
-                                    </td>
-                                </tr>                          
-                            </table>
-                        </div>
-                    </div-->
+                   
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a href="<?= $this->url->get("dashboard/newArchive"); ?>"><span class="glyphicon glyphicon-briefcase">
+                            <a href="<?= $this->url->get("zip/newArchive"); ?>"><span class="glyphicon glyphicon-briefcase">
                             </span> Archives</a>
                         </h4>
                     </div>
-                    <!--div id="collapseThree" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <table class="table table-responsive table-triped">
-                                <tr class="table table-triped">
-                                    <td>
-                                       <span class="glyphicon glyphicon-book"></span> <a href="<?= $this->url->get("dashboard/newArchive"); ?>"> Cr&eacute;er une archive</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-bookmark"> </span><a href="<?= $this->url->get("dashboard/mesArchives"); ?>"> Mes Archives</a> 
-                                    </td>
-                                </tr>
-                               
-                            </table>
-                        </div>
-                    </div-->
+                    
                 </div>
 
                 <div class="panel panel-default">
@@ -134,12 +112,12 @@
                             <table class="table table-responsive table-triped">
                                 <tr class="table table-triped">
                                     <td>
-                                       <span class="glyphicon glyphicon-earphone"></span> <a href="<?= $this->url->get("dashboard/newContact"); ?>"> Cr&eacute;er un contact</a>
+                                       <span class="glyphicon glyphicon-earphone"></span> <a href="<?= $this->url->get("contact/newContact"); ?>"> Cr&eacute;er un contact</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                       <span class="glyphicon glyphicon-list-alt"></span> <a href="<?= $this->url->get("dashboard/mesContacts"); ?>"> Mes Contacts</a> 
+                                       <span class="glyphicon glyphicon-list-alt"></span> <a href="<?= $this->url->get("contact/mesContacts"); ?>"> Mes Contacts</a> 
                                     </td>
                                 </tr>                               
                             </table>
@@ -147,12 +125,12 @@
                     </div>
                 </div>
 
-
+                {% if session.get('sms') ==1 %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><span class="glyphicon glyphicon-envelope">
-                            </span> Couriel</a>
+                            </span> Messagerie sms</a>
                         </h4>
                     </div>
                     <div id="collapseFive" class="panel-collapse collapse">
@@ -160,21 +138,48 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-comment"></span><a href="<?= $this->url->get("dashboard/newMessage"); ?>"> Nouveau</a>
+                                        <span class="glyphicon glyphicon-comment"></span><a href="<?= $this->url->get("message/newMessage"); ?>"> Envoyer sms</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-cloud-upload"></span><a href="<?= $this->url->get("dashboard/mesMessages"); ?>"> Envoy&eacute;s</a>
+                                        <span class="glyphicon glyphicon-cloud-upload"></span><a href="<?= $this->url->get("message/mesMessages"); ?>"> Boite d&apos;envoie</a>
                                     </td>
                                 </tr>     
                             </table>
                         </div>
                     </div>
                 </div>
+                {% endif %}
+                {% if session.get('permission') ==1 %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseik"><span class="glyphicon glyphicon-user">
+                            </span>R&ocirc;le/Permission</a>
+                        </h4>
+                    </div>
+                    <div id="collapseik" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="fa fa-user"></span><a href="<?= $this->url->get("profile/newUser"); ?>"> utilisateurs</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-cloud-upload"></span><a href="<?= $this->url->get("profile/newProfile"); ?>"> profil</a>
+                                    </td>
+                                </tr>     
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
 
                
-            <!--/div-->
+                {% if session.get('systeme') == 1 %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -192,14 +197,17 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com"> Utilisateur</a>
+                                        <span class="glyphicon glyphicon-user"></span><a href="#"> Utilisateur</a>
                                     </td>
                                 </tr>     
                             </table>
                         </div>
                     </div>
                 </div>
+                {% endif %}
 
+
+                {% if session.get('corbeille') ==1 %}
                  <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -208,6 +216,7 @@
                         </h4>
                     </div>      
                 </div>
+                {% endif %}
             </div>
        
             
@@ -222,11 +231,13 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         
         <!-- Latest compiled and minified JavaScript -->
-        <script src="<?= $this->url->getBaseUri(); ?>public/vendor/jquery/dist/jquery.js" ></script>
-        <script src="<?= $this->url->getBaseUri(); ?>public/vendor/jquery/dist/jquery.min.js"></script>
+        <script src="<?= $this->url->getBaseUri(); ?>public/js/jquery.js" ></script>
+        <!--script src="<?= $this->url->getBaseUri(); ?>public/vendor/jquery/dist/jquery.js" ></script-->
+        <!--script src="<?= $this->url->getBaseUri(); ?>public/vendor/jquery/dist/jquery.min.js"></script-->
         <script src="<?= $this->url->getBaseUri(); ?>public/vendor/bootstrap/dist/js/bootstrap.min.js"></script>      
+        <script src="<?= $this->url->getBaseUri(); ?>public/js/delete.js"></script>      
+        <!--script src="<?= $this->url->getBaseUri(); ?>vendor/ckeditor/ckeditor/ckeditor.js"></script-->
         <script src="<?= $this->url->getBaseUri(); ?>public/js/archives.js"></script>      
-        <script src="<?= $this->url->getBaseUri(); ?>vendor/ckeditor/ckeditor/ckeditor.js"></script>
     </body>
 </html>
 

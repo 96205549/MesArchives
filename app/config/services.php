@@ -17,6 +17,7 @@ use Phalcon\Flash\Direct as Flash;
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
  */
 $di = new FactoryDefault();
+//$di = new ;
 
 /**
  * The URL component is used to generate all kind of urls in the application
@@ -56,28 +57,7 @@ $di->setShared('view', function () use ($config) {
 });
 
 
-/*
- * add the smarty engine
- */
-/* $di->setShared('view', function () use ($config) {
-     '.tpl' =>  function ($view, $di) use ($config) {
-        $smarty = new Smarty($view, $di);
 
-        $smarty->setTemplateDir($view->getViewsDir());
-        //$smarty->setCompileDir( '../app/viewscompiled' );
-        $smarty->error_reporting = error_reporting() ^ E_NOTICE;
-        $smarty->escape_html = true;
-        $smarty->_file_perms = 0666;
-        $smarty->_dir_perms = 0777;
-        $smarty->force_compile = false;
-        $smarty->compile_check = true;
-        $smarty->caching = false;
-        $smarty->debugging = true;
-
-        return $smarty;
-    }
-});
-*/
 /**
  * Database connection is created based in the parameters defined in the configuration file
  */
@@ -98,18 +78,20 @@ $di->setShared('modelsMetadata', function () {
     return new MetaDataAdapter();
 });
 
+
+/*
+ * personnalisation du controller index
+ */
+ $di->set('router', function() use ($di, $config) {
+        $router = new \Phalcon\Mvc\Router();
+        $router->setDefaultController("session");
+        //$router->setUriSource($config->application->baseUri);
+        return $router;
+    });
+
 /**
  * Register the session flash service with the Twitter Bootstrap classes
  */
-$di->set('flash', function () {
-    return new Flash(array(
-        'error'   => 'alert alert-danger',
-        'success' => 'alert alert-success',
-        'notice'  => 'alert alert-info',
-        'warning' => 'alert alert-warning'
-    ));
-});
-
 /**
  * Start the session the first time some component request the session service
  */
@@ -119,3 +101,13 @@ $di->setShared('session', function () {
 
     return $session;
 });
+
+$di->set('flashSession', function () {
+    $flashsession = new \Phalcon\Flash\Session(array(
+        'error' => 'alert alert-danger alert-dismissable',
+        'success' => 'alert alert-success alert-dismissable',
+        'notice' => 'alert alert-info alert-dismissable',
+        'warning' => 'alert alert-warning alert-dismissable'
+    ));
+    return $flashsession;
+}, true);

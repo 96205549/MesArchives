@@ -1,46 +1,59 @@
+<?php
+if (!isset($fichiers)) {
+    $fichiers = [];
+}
+
+?>
 <div class="contain">
     <h4>Mes fichiers</h4>
     <div class="clearfix">&nbsp;</div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <span  data-toggle="collapse" data-target="#demo1" style="cursor: alias;"><a href="#"><i class="fa fa-plus"></i> Ajouter un/des fichier(s)</a></span>
-
-        </div>
-        <div id="demo1" class="collapse col-md-12">
-            <span class="clearfix">&nbsp;</span>
+    <form method="post" action="newFile" enctype="multipart/form-data">
+        <div class="row">
             <div class="col-md-12">
-                <table class="table table-responsive">
-                    <tr>
-                        <td colspan="4">
-                            <span class="col-md-6"><input type="text" class="form-control" placeholder="description fichier"></span>
-                            <span class="col-md-4"><input type="file" name="fichier[]"></span>
-                            <span class="col-md-2" id="bloc-button">
-                                <button type="button" class="btn btn-success btn-xs" onclick="addDoc()" id="addDoc" >
-                                    <i class="fa fa-plus"></i> &nbsp;Nouveau
-                                </button>
-                            </span><br>
-
-                        </td>
-                    </tr>                               
-                </table> 
-                <table class="table table-responsive"id="tableau_doc" >
-                    <tr>
-                        <td colspan="4">
-                        </td>
-                    </tr>
-                </table>
+                <span  data-toggle="collapse" data-target="#demo1" style="cursor: alias;"><a href="#"><i class="fa fa-plus"></i> Ajouter un/des fichier(s)</a></span>
 
             </div>
-            <div class="row">
-                <span class="col-md-10">
-                    &nbsp;
-                </span>
-                <span class="col-md-2">
-                    <button class="btn btn-primary fa fa-check " type="submit" >&nbsp;Enregistrer</button>
-                </span>
+            <div id="demo1" class="collapse col-md-12">
+                <span class="clearfix">&nbsp;</span>
+                <div class="col-md-12">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td colspan="4">
+                                <span class="col-md-6"><input type="text" name="descfile[]" class="form-control" placeholder="description fichier" required=""></span>
+                                <span class="col-md-4"><input type="file" name="fichier[]"></span>
+                                <span class="col-md-2" id="bloc-button">
+                                    <button type="button" class="btn btn-success btn-xs"  id="addDoc" >
+                                        <i class="fa fa-plus"></i> &nbsp;Nouveau
+                                    </button>
+                                </span><br>
+
+                            </td>
+                        </tr>                               
+                    </table> 
+                    <table class="table table-responsive"id="tableau_doc" >
+                        <tr>
+                            <td colspan="4">
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="row">
+                    <span class="col-md-10">
+                        &nbsp;
+                    </span>
+                    <span class="col-md-2">
+                        <button class="btn btn-primary fa fa-check " type="submit" >&nbsp;Enregistrer</button>
+                    </span>
+                </div>
             </div>
         </div>
+    </form>
+    <div class="clearfix">&nbsp;</div>
+    <div class="col-md-12 row notification">
+        <?php if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+            <div><p><?php $this->flashSession->output() ?></p></div>
+<?php endif; ?>
     </div>
     <div class="clearfix">&nbsp;</div>
     <div class="row">
@@ -55,33 +68,18 @@
                     <td align="center"><b>T&eacute;l&eacute;charger</b></td>
                     <td align="center"><b>supprimer</b></td>
                 </tr>
+                <?php $i=0; foreach ($fichiers as $file) : $i++; ?>
                 <tr class="table-striped">
                     <td><img src="../public/img/fich.jpg" width="25" height="25"></td>
-                    <td><b>1</b></td>
-                    <td>mon cv</td>
-                    <td align="center">pdf</td>
-                    <td align="center">110 ko</td>
+                    <td><b><?= $i ?></b></td>
+                    <td><?= $file->description ?></td>
+                    <td align="center"><?= $file->extension ?></td>
+                    <td align="center"><?= $file->taille ?> ko</td>
                     <td align="center"><a href="#"><span class="glyphicon glyphicon-cloud-download text-primary"></span></a></td>
-                    <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
+                    <td align="center"><a href="deleteFile?id=<?= $file->idfile ?>" data-confirm="<?= $file->description ?>"><span class="glyphicon glyphicon-trash text-danger"></span></a></td>
                 </tr>
-                <tr class="table-striped">
-                    <td><img src="../public/img/fich.jpg" width="25" height="25"></td>
-                    <td><b>2</b></td>
-                    <td>mon parcour universitaire</td>
-                    <td align="center">xls</td>
-                    <td align="center">110 ko</td>
-                    <td align="center"><a href="#"><span class="glyphicon glyphicon-cloud-download text-primary"></span></a></td>
-                    <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
-                </tr>
-                <tr class="table-striped">
-                    <td><img src="../public/img/fich.jpg" width="25" height="25"></td>
-                    <td><b>3</b></td>
-                    <td>dossier soneb</td>
-                    <td align="center">xls</td>
-                    <td align="center">110 ko</td>
-                    <td align="center"><a href="#"><span class="glyphicon glyphicon-cloud-download text-primary"></span></a></td>
-                    <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
-                </tr>
+                <?php endforeach; ?>
+               
             </table>
         </div>
     </div>

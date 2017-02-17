@@ -78,6 +78,14 @@ $di->setShared('modelsMetadata', function () {
     return new MetaDataAdapter();
 });
 
+/*
+ * defintion du chemin d'upload file
+ */
+$di->set('rootfile', function () use ($config) {
+    $cheminUpload = $config->application->rootDir;
+    return $cheminUpload;
+}, true);
+
 
 /*
  * personnalisation du controller index

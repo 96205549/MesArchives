@@ -4,7 +4,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  * Description of fichier
  *
@@ -14,16 +13,20 @@ use Phalcon\Mvc\Model;
 
 class fichier extends Model
 {
+
     private $idfile;
     private $nomfile;
     private $description;
     private $iddos;
     private $date;
+    private $taille;
+    private $extension;
     private $iduser;
-    
+
     /*
      * declaration des getters
      */
+
     function getIdfile()
     {
         return $this->idfile;
@@ -49,14 +52,24 @@ class fichier extends Model
         return $this->date;
     }
 
+    function getTaille()
+    {
+        return $this->taille;
+    }
+
+    function getExtension()
+    {
+        return $this->extension;
+    }
+
     function getIduser()
     {
         return $this->iduser;
     }
-
     /*
      * declaration des setters
      */
+
     function setIdfile($idfile)
     {
         $this->idfile = $idfile;
@@ -82,12 +95,22 @@ class fichier extends Model
         $this->date = $date;
     }
 
+    function setTaille($taille)
+    {
+        $this->taille = $taille;
+    }
+
+    function setExtension($extension)
+    {
+        $this->extension = $extension;
+    }
+
     function setIduser($iduser)
     {
         $this->iduser = $iduser;
     }
 
-     public function initialize()
+    public function initialize()
     {
         /*
          * initialisation de la table
@@ -101,7 +124,5 @@ class fichier extends Model
          * relation avec la table dossier
          */
         $this->belongsTo("iddos", "dossier", "iddos");
-        
     }
-
 }

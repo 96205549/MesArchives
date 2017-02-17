@@ -18,7 +18,7 @@ class ContactController extends controller
     {
         $this->view->setMainView('board');
         $this->tag->setTitle('Bienvenue');
-        //parent::initialize();
+       
     }
 
     public function indexAction()
@@ -30,7 +30,36 @@ class ContactController extends controller
     {
 
         if ($this->request->isPost()) {
-            
+
+            $fulname = $this->request->getPost("fulname");
+            $mobile = $this->request->getPost("mobile");
+            $email = $this->request->getPost("email");
+            $groupe = $this->request->getPost("groupid");
+
+            if (empty($fulname)) {
+                $this->flashSession->error("Veuillez entrer le nom d&apos utilisateur");
+            } elseif (empty($mobile)) {
+                $this->flashSession->error("Veuillez renseigner le numero du client");
+            } elseif (empty($email)) {
+                $this->flashSession->error("Veuillez renseigner le mail du client");
+            } elseif (!(int) $mobile) {
+                $this->flashSession->error("Le numero ne peut &ecirc;tre une chaine de caractere");
+            } elseif ((strlen($mobile) < 8)) {
+                $this->flashSession->error("Veuillez renseigner un numero correcte");
+            } else {
+                $newContact = new contact();
+                $newContact->setFulname($fulname);
+                $newContact->setMobile($mobile);
+                $newContact->setEmail($email);
+                $newContact->setIdgroupe($groupe);
+                $newContact->setIduser($this->session->get('userid'));
+                if ($newContact->save()) {
+                    $this->flashSession->success("Enregistrement avec succ&egrave;s");
+                } else {
+                    $this->flashSession->error("L&apos; enregistrement a echou&eacute;");
+                }
+            }
+            $this->view->setVars(["fulname" => $fulname, "mobile" => $mobile, "email" => $email]);
         }
 
         $groupes = groupe::find();
@@ -84,9 +113,136 @@ class ContactController extends controller
 
         // }
     }
+    /*
+     * update groupe
+     */
+
+    public function updateGroupeAction()
+    {
+        if ($this->request->isPost()) {
+            $reponse = ["success" => false, "msg" => null, "id" => null];
+
+            $id = $this->request->getPost('upid');
+
+            $nom = $this->request->getPost('upgroupe');
+
+
+            $groupe = groupe::findFirstByIdgroupe($id);
+
+            if ($groupe) {
+                $groupe->nomgroupe = $nom;
+                $groupe->iduser = $this->session->get('userid');
+
+                if ($groupe->update()) {
+                    $reponse["msg"] = "modification &eacute;ffectuer avec succ&egrave;s";
+                    $reponse["success"] = true;
+                } else {
+                    $reponse["msg"] = "echec de modification";
+                }
+            }
+            return json_encode($reponse);
+        }
+    }
+    /*
+     * delete groupe
+     */
+
+    public function deleteGroupeAction()
+    {
+        if (!$this->request->isAjax()) {
+            return null;
+        }
+        $reponse = ["success" => false, "msg" => null];
+        $id = $this->request->get('id');
+        $groupe = groupe::findFirstByIdgroupe($id);
+        if($groupe == TRUE){
+            $membres= contact::find(["idgroupe=:val:","bind"=>["val"=>$groupe->idgroupe]]);
+            if($membres){
+                foreach ($membres as $mb) {
+                    $del= $mb->delete();
+                }
+            }
+        if ( $groupe->delete()) {
+            $reponse["msg"] = "le groupe a &eacute;t&eacute; supprimer avec succ&egrave;s";
+
+            $reponse["success"] = true;
+        } else {
+            $reponse["msg"] = "echec de suppression";
+        }
+    }
+        return json_encode($reponse);
+    }
+    
+    
+    /*
+     * gestions des contacts
+     */
 
     public function mesContactsAction()
     {
-        
+        $contacts = contact:: find();
+        $this->view->contacts = $contacts;
+    }
+
+    public function updateAction()
+    {
+        $id = $this->request->get('id');
+        if (!(int) $id) {
+            return $this->response->redirect('contact/newContact');
+        }
+
+        $oldContact = contact::findFirstById($id);
+        $this->view->contact = $oldContact;
+
+        if ($this->request->isPost()) {
+            $fulname = $this->request->getPost("fulname");
+            $mobile = $this->request->getPost("mobile");
+            $email = $this->request->getPost("email");
+            $groupe = $this->request->getPost("groupid");
+            //die(print_r($groupe));
+            if (empty($fulname)) {
+                $this->flashSession->error("Veuillez entrer le nom d&apos utilisateur");
+            } elseif (empty($mobile)) {
+                $this->flashSession->error("Veuillez renseigner le numero du client");
+            } elseif (empty($email)) {
+                $this->flashSession->error("Veuillez renseigner le mail du client");
+            } elseif (!(int) $mobile) {
+                $this->flashSession->error("Le numero ne peut &ecirc;tre une chaine de caractere");
+            } elseif ((strlen($mobile) < 8)) {
+                $this->flashSession->error("Veuillez renseigner un numero correcte");
+            } else {
+
+                $oldContact->setFulname($fulname);
+                $oldContact->setMobile($mobile);
+                $oldContact->setEmail($email);
+                $oldContact->setIdgroupe($groupe);
+                $oldContact->setIduser($this->session->get('userid'));
+                if ($oldContact->update()) {
+                    $this->flashSession->success("Enregistrement avec succ&egrave;s");
+                } else {
+                    $this->flashSession->error("L&apos; enregistrement a echou&eacute;");
+                }
+            }
+        }
+        $groupes = groupe::find();
+        $this->view->groupes = $groupes;
+    }
+
+    public function deleteAction()
+    {
+        $id = $this->request->get('id');
+        if (!(int) $id) {
+            return $this->response->redirect('contact/newContact');
+        }
+        $oldContact = contact::findFirstById($id);
+        if ($oldContact) {
+            if ($oldContact->delete()) {
+                $this->flashSession->success("suppression r&eacute;ussir");
+            } else {
+                $this->flashSession->error("Echec de la suppression");
+            }
+            return $this->response->redirect("contact/mesContacts");
+        }
+        $this->response->redirect("contact/newContact");
     }
 }

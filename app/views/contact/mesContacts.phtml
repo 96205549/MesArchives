@@ -1,35 +1,32 @@
+<?php
+if (!isset($contacts)) {
+    $contacts = [];
+}
+?>
 <div class="contain">
     <div class="clearfix">&nbsp;</div>
     <h5>Mes contacts / <a href='newContact'>Nouveau contact</a></h5>
-    
-    
+
+
     <div class="clearfix">&nbsp;</div>
+    <div class="col-md-12 row notification">
+        <?php if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+            <div><p><?php $this->flashSession->output() ?></p></div>
+        <?php endif; ?>
+    </div>
     <div class="clearfix">&nbsp;</div>
     <div class="row">
         <div class="col-md-12">
             <table class="table table-responsive table-striped">
-               
+                <?php foreach($contacts as $contact): ?>
                 <tr class="table-striped">
-                    <td><i class="fa fa-user text-danger"></i>&nbsp; Bouraima joezer <br> <i class="fa fa-envelope-o text-primary">&nbsp; bouraimajoezer@gmail.com</i></td>
-                    <td align="center"><i class="fa fa-phone text-primary"></i>&nbsp; +22996205549</td>
-                     <td align="center"><i class="fa fa-users text-info"></i>&nbsp; groupeA</td>
-                    <td align="center"><a href="#"><span class="glyphicon glyphicon-pencil text-primary"></span></a></td>
-                    <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
+                    <td><i class="fa fa-user text-danger"></i>&nbsp; <?= $contact->fulname ?> <br> <i class="fa fa-envelope-o text-primary">&nbsp; <?= $contact->email ?></i></td>
+                    <td align="center"><i class="fa fa-phone text-primary"></i>&nbsp; <?= $contact->mobile ?></td>
+                    <td align="center"><?php if($contact->idgroupe > 0): ?> <i class="fa fa-users text-info"></i>&nbsp; <?php endif; ?><?= ($contact->idgroupe > 0 ) ? $contact->groupe->nomgroupe: "" ?> </td>
+                    <td align="center"><a href="update?id=<?= $contact->id ?>"><span class="glyphicon glyphicon-pencil text-primary"></span></a></td>
+                    <td align="center"><a href="delete?id=<?= $contact->id ?>" data-confirm="<?= $contact->fulname ?>"><span class="glyphicon glyphicon-remove text-danger"></span></a></td>
                 </tr>
-                <tr class="table-striped">
-                     <td><i class="fa fa-user"></i> &nbsp; Clotoe Rodrigue <br><i class="fa fa-envelope-o text-primary"> &nbsp;colotoeromaric@gmail.com</i></td>
-                     <td align="center"><i class="fa fa-phone text-primary"></i>&nbsp; +22996205549</td>
-                     <td align="center"><i class="fa fa-users text-info"></i>&nbsp; groupeB</td>
-                    <td align="center"><a href="#"><span class="glyphicon glyphicon-pencil text-primary"></span></a></td>
-                    <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
-                </tr>
-                <tr class="table-striped">
-                    <td><i class="fa fa-user"></i>&nbsp; Oke Josu&eacute; <br><i class="fa fa-envelope-o text-primary"> &nbsp;ok.josu@gmail.com</i></td>
-                     <td align="center"><i class="fa fa-phone text-primary"></i>&nbsp;+22997656612</td>
-                     <td align="center"><i class="fa fa-users text-info"></i>&nbsp;groupeC</td>
-                    <td align="center"><a href="#"><span class="glyphicon glyphicon-pencil text-primary"></span></a></td>
-                    <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
-                </tr>
+                <?php endforeach; ?>            
             </table>
         </div>
     </div>

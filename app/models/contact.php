@@ -97,6 +97,10 @@ class contact extends Model
          * relation avec la table utilisateur
          */
         $this->belongsTo("iduser", "user", "iduser");
+        /*
+         * relation avec la table contact
+         */
+        $this->belongsTo("idgroupe", "groupe", "idgroupe");
     }
 
 

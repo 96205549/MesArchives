@@ -1,21 +1,24 @@
 <?php
-if (!isset($dossiers)) {
-    $dossiers = [];
-}
 
+if (!isset($docFiles)) {
+    $docFiles = [];
+}
+if (!isset($dossier)) {
+    $dossier = [];
+}
 ?>
 <div class="contain">
-    <h3>Nouveau dossier</h3>
+    <h4 class="text-info">Dossier <?= $dossier->nomdos ?></h4>
 
     <form method="post" id="form-folder" action="newFolder" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-3">
                 <span><img src="../public/img/folder.jpg"></span><br>
-                <input type="text" class="form-control fln" placeholder="Nom du dossier" name="foldername" required=""><br>
+                <input type="text" class="form-control inputF" placeholder="Nom du dossier" name="foldername" value="<?= $dossier->nomdos ?>" required=""><br>
 
                 <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check btn-primary"></i> Enregistrer </button>
                 <span>&nbsp;</span>
-                <button type="reset" class="btn btn-default btn-sm">Annuler </button>
+                <a href="newFolder" type="button" class="btn btn-default btn-sm"> Nouveau dossier </a>
             </div>
 
             <div style="float: left; border: 1px solid #ccc; height: 250px;"></div>
@@ -28,7 +31,7 @@ if (!isset($dossiers)) {
                             <span class="col-md-4"><input type="file" name="fichier[]"></span>
                             <span class="col-md-2" id="bloc-button">
                                 <button type="button" class="btn btn-success btn-xs"  id="addDoc" >
-                                    <i class="fa fa-plus"></i> &nbsp;Nouveau
+                                    <i class="fa fa-plus"></i> &nbsp;Ajouter un fichier
                                 </button>
                             </span><br>
 
@@ -50,7 +53,7 @@ if (!isset($dossiers)) {
     <div class="col-md-12 row notification">
         <?php if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
             <div><p><?php $this->flashSession->output() ?></p></div>
-        <?php endif; ?>
+<?php endif; ?>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -58,24 +61,25 @@ if (!isset($dossiers)) {
                 <tr class="table-striped">
                     <td> </td>
                     <td><b>N&deg;</b></td>
-                    <td><b>Nom dossier</b></td>
+                    <td><b>Nom fichier</b></td>
                     <td><b>file(s)</b></td>
                     <td align='center'><b>ouvrir</b></td>
                     <td align='center'><b>supprimer</b></td>
                 </tr>
-                <?php $i = 0;
-                foreach ($dossiers as $doc): $i++; ?>
-                    <tr class="table-striped">
-                        <td><img src="../public/img/folder.jpg" width="20" height="20"></td>
-                        <td><b><?= $i ?></b></td>
-                        <td><?= $doc->nomdos ?></td>
-                        <td><?= "(" . count($doc->fichier) . ")" ?></td>
-                        <td align="center"><a href="openFolder?id=<?= $doc->iddos ?>"><span class="glyphicon glyphicon-eye-open text-primary"></span></a></td>
-                        <td align="center"><a href="deleteFolder?id=<?= $doc->iddos ?>" data-confirm="<?= $doc->nomdos ?>"><span class="glyphicon glyphicon-trash text-danger"></span></a></td>
-                    </tr>
+                <?php $i=0; foreach ($docFiles as $file): $i++ ?>
+                <tr class="table-striped">
+                    <td><img src="../public/img/fich.jpg" width="20" height="20"></td>
+                    <td><b><?= $i ?></b></td>
+                    <td><?= $file->description ?></td>
+                    <td><?= $file->nomfile ?></td>
+                    <td align="center"><a href="#"><span class="glyphicon glyphicon-pencil text-primary"></span></a></td>
+                    <td align="center"><a href="deleteFile?id=<?= $file->idfile ?>" data-confirm="<?= $file->description ?>"><span class="glyphicon glyphicon-trash text-danger"></span></a></td>
+                </tr>
                 <?php endforeach; ?>
-
+                
             </table>
         </div>
     </div>
 </div>
+
+

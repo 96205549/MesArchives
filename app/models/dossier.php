@@ -75,5 +75,9 @@ class dossier extends Model
          * relation avec la table utilisateur
          */
         $this->belongsTo("iduser", "user", "iduser");
+        /*
+         * relation avec la table fichier
+         */
+        $this->hasMany("iddos", "fichier", "iddos");
     }
 }

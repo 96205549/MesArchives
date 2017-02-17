@@ -49,20 +49,20 @@ if (!isset($groupes)) {
                     <tr>
                         <td>
                             <span class="col-md-8">
-                                <p ><span class="fa fa-user"></span><input type="text" class="form-control" placeholder="Nom et prenom" name="fulname"></p>
+                                <p ><span class="fa fa-user"></span><input type="text" class="form-control" placeholder="Nom et prenom" name="fulname" value="<?= (isset($fulname) ? $fulname : "") ?>"></p>
                             </span>
                         </td>
                     </tr>
                     <tr>
                         <td>   
-                            <span class="col-md-8"><p ><span class="fa fa-phone"></span><input type="text" class="form-control" name="phone" placeholder="mobile"></p>
+                            <span class="col-md-8"><p ><span class="fa fa-phone"></span><input type="text" class="form-control" name="mobile" value="<?= (isset($mobile) ? $mobile : "") ?>" placeholder="mobile"></p>
                             </span>
                         </td>
                     </tr>
                     <tr>
                         <td>  
                             <span class="col-md-8">
-                                <p ><span class="fa fa-envelope"></span><input type="text" class="form-control" name="email" placeholder="email"></p>
+                                <p ><span class="fa fa-envelope"></span><input type="text" class="form-control" type="email" value="<?= (isset($email) ? $email : "") ?>" name="email" placeholder="email"></p>
                             </span>
                         </td>
                     </tr>
@@ -70,7 +70,8 @@ if (!isset($groupes)) {
                         <td>
                             <span class="col-md-8">
                                 <p ><span class="fa fa-users"></span> 
-                                    <select class="form-control select-goup" name="groupe">
+                                    <select class="form-control select-goup" name="groupid">
+                                        <option value="NULL">---</option>
                                         <?php foreach ($groupes as $value): ?>
                                             <option value="<?= $value->idgroupe ?>"><?= $value->nomgroupe ?></option>
                                         <?php endforeach; ?>
@@ -114,7 +115,9 @@ if (!isset($groupes)) {
                         <span class="col-md-9"> <input type="text" id="groupname" name="groupname" class="form-control"></span>
                         <span class="col-md-3"> <button class="btn btn-default"><i class="fa fa-pencil"></i>&nbsp;modifier</button></span>
                     </div>
-                     <div class="clearfix">&nbsp;</div>
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="col-md-12 text-primary" style="margin-top:10px;" id="notification"> </div>
+                    <div class="clearfix">&nbsp;</div>
                     <div class="row col-md-12 scroll-modal">
                         <div class="clearfix">&nbsp;</div>
 
@@ -125,10 +128,10 @@ if (!isset($groupes)) {
                                     <td class="col-md-8">
                                         <?= $groupe->nomgroupe ?></td>
                                     <td class="col-md-2">
-                                        <a href="#" class="btn btn-sm btn-default"><i class="fa fa-pencil"></i>&nbsp;modifier</a>
+                                        <a href="updateGroupe?id=<?= $groupe->idgroupe ?>" id="<?= $groupe->idgroupe ?>" name=" <?= $groupe->nomgroupe ?>" class="btn btn-sm btn-default"><i class="fa fa-pencil"></i>&nbsp;modifier</a>
                                     </td>
                                     <td class="col-md-2">
-                                        <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i>&nbsp; supprimer</a>
+                                        <a href="<?= $this->url->get("contact/deleteGroupe?id=".$groupe->idgroupe) ?>" id="<?= $groupe->idgroupe ?>"  class="btn btn-sm btn-danger delete-groupe"><i class="fa fa-remove"></i>&nbsp; supprimer</a>
                                     </td>
                                 </tr>  
                                 <tr><td colspan="3">&nbsp;</td></tr>

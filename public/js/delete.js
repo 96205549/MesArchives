@@ -18,7 +18,7 @@ $(function () {
                                     '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>'+
                                     '<h3 id="dataConfirmLabel" class="text-info">Merci de confirmer</h3>'+
                                 '</div>'+
-                                '<div class="modal-body">Voulez-vous supprimer le profile <b class=\'whatfaq\'></b>?</div>'+
+                                '<div class="modal-body">Voulez-vous supprimer <b class=\'whatfaq\'></b>?</div>'+
                                 '<div class="modal-footer">'+
                                     '<a class="btn btn-danger" id="dataConfirmOK">Oui</a>'+
                                     '<button class="btn" data-dismiss="modal" aria-hidden="true">Non</button>'+

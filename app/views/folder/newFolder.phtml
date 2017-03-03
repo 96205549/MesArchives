@@ -5,14 +5,15 @@ if (!isset($dossiers)) {
 
 ?>
 <div class="contain">
-    <h3>Nouveau dossier</h3>
+    <h4 class="text-warning">Nouveau dossier</h4>
 
     <form method="post" id="form-folder" action="newFolder" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-3">
-                <span><img src="../public/img/folder.jpg"></span><br>
+                 <div class="clearfix">&nbsp;</div>
+                <span><i class="fa fa-folder-open-o fa-5x text-warning"></i></span><br>
                 <input type="text" class="form-control fln" placeholder="Nom du dossier" name="foldername" required=""><br>
-
+                 <div class="clearfix">&nbsp;</div>
                 <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check btn-primary"></i> Enregistrer </button>
                 <span>&nbsp;</span>
                 <button type="reset" class="btn btn-default btn-sm">Annuler </button>
@@ -61,17 +62,17 @@ if (!isset($dossiers)) {
                     <td><b>Nom dossier</b></td>
                     <td><b>file(s)</b></td>
                     <td align='center'><b>ouvrir</b></td>
-                    <td align='center'><b>supprimer</b></td>
+                    <?php if($this->session->get('sup')=="1"): ?><td align='center'><b>supprimer</b></td><?php endif; ?>
                 </tr>
                 <?php $i = 0;
                 foreach ($dossiers as $doc): $i++; ?>
                     <tr class="table-striped">
-                        <td><img src="../public/img/folder.jpg" width="20" height="20"></td>
+                        <td><i class="fa fa-folder-open text-warning"></i></td>
                         <td><b><?= $i ?></b></td>
                         <td><?= $doc->nomdos ?></td>
                         <td><?= "(" . count($doc->fichier) . ")" ?></td>
                         <td align="center"><a href="openFolder?id=<?= $doc->iddos ?>"><span class="glyphicon glyphicon-eye-open text-primary"></span></a></td>
-                        <td align="center"><a href="deleteFolder?id=<?= $doc->iddos ?>" data-confirm="<?= $doc->nomdos ?>"><span class="glyphicon glyphicon-trash text-danger"></span></a></td>
+                        <?php if($this->session->get('sup')=="1"): ?><td align="center"><a href="deleteFolder?id=<?= $doc->iddos ?>" data-confirm="<?= $doc->nomdos ?>"><span class="glyphicon glyphicon-trash text-danger"></span></a></td><?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
 

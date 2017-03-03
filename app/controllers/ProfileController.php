@@ -18,6 +18,8 @@ class ProfileController extends Controller
     {
         $this->view->setMainView('board');
         $this->tag->setTitle('Bienvenue');
+        $corbeilles = corbeille:: find(['order'=>' idcorb DESC']);
+        $this->view->corbeilles = ($corbeilles)? $corbeilles : [];
     }
 
     public function indexAction()
@@ -46,6 +48,7 @@ class ProfileController extends Controller
                 $this->response->redirect("profile/newProfile");
             }
         }
+         $this->view->page = "permission";
     }
 
     public function updateAction()
@@ -54,6 +57,9 @@ class ProfileController extends Controller
         ((int) $id) ? $id = $this->request->get('id') : $this->response->redirect("profile/newProfile");
 
         $profil = profile::findFirstByIdprofile($id);
+        if($profil == FALSE){
+             return $this->response->redirect('profile/newProfile');
+        }
         $this->view->profil = ($profil) ? $profil : [];
 
         if ($this->request->isPost()) {
@@ -68,6 +74,7 @@ class ProfileController extends Controller
                 $this->flashSession->warning("la mise a jour du profile a echouer   ");
             }
         }
+         $this->view->page = "permission";
     }
 
     public function deleteAction()
@@ -81,6 +88,7 @@ class ProfileController extends Controller
                 $this->response->redirect("profile/newProfile");
             }
         }
+         $this->view->page = "permission";
     }
 
     public function newUserAction()
@@ -129,6 +137,7 @@ class ProfileController extends Controller
                 }
             }
         }
+         $this->view->page = "permission";
     }
 
     public function updateUserAction()
@@ -140,6 +149,9 @@ class ProfileController extends Controller
         ((int) $id) ? $id = $this->request->get('id') : $this->response->redirect("profile/newUser");
 
         $users = user::findFirstByIduser($id);
+        if($users == FALSE){
+             return $this->response->redirect('profile/newUser');
+        }
         $this->view->users = ($users) ? $users : [];
 
         if ($this->request->isPost()) {
@@ -172,6 +184,7 @@ class ProfileController extends Controller
                 }
             }
         }
+         $this->view->page = "permission";
     }
 
     public function passAction()
@@ -209,6 +222,7 @@ class ProfileController extends Controller
                 $this->response->redirect("profile/newUser");
             }
         }
+         $this->view->page = "permission";
     }
     
     
@@ -223,5 +237,6 @@ class ProfileController extends Controller
                 $this->response->redirect("profile/newUser");
             }
         }
+         $this->view->page = "permission";
     }
 }

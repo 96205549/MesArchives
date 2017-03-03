@@ -1,14 +1,29 @@
 .bod{
     padding:0 px;
     margin: 0 px;
-    background-color:#ffffff;
+    /*background-color:#ffffff;*/
+    background-color:ghostwhite;
+}
+.block-ga{
+    padding: -15px;
 }
 .bloc-right{
+    padding:0px; 
     padding-top:50px;
     background-color: #E1E6FA;
+    width: 200px;
+    float:left;
+    position: fixed;
+
     /*background-color: #ECE8BE;*/
     /*height: 700px;*/
     height: 960px;
+}
+.xfixed{
+    width: 200px;
+    height:900px;
+    float:left;
+    background-color: #E1E6FA;
 }
 .bloc-left{
     padding-top: 50px;
@@ -22,7 +37,7 @@
 
 
 .cercle{
-    
+
     height: 250px;
     /*background-color:gansboro;*/
     text-align: center;
@@ -38,6 +53,11 @@
 .inputF {
     background-color: transparent;
     border: none;
-    
+
     /*color: #CCC;*/
+}
+.reveal-modal {
+    position: relative;
+    margin-top: 150px;
+    /* top: 25%;*/
 }

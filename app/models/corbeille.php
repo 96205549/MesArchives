@@ -17,6 +17,8 @@ class corbeille extends Model
     private $idcorb;
     private $nomfile;
     private $description;
+    private $typefile;
+    private $taille;
     private $iddos;
     private $date;
     private $iduser;
@@ -39,6 +41,16 @@ class corbeille extends Model
         return $this->description;
     }
 
+      function getTypefile()
+    {
+        return $this->typefile;
+    }
+
+    function getTaille()
+    {
+        return $this->taille;
+    }
+    
     function getIddos()
     {
         return $this->iddos;
@@ -72,6 +84,16 @@ class corbeille extends Model
         $this->description = $description;
     }
 
+      function setTypefile($typefile)
+    {
+        $this->typefile = $typefile;
+    }
+
+    function setTaille($taille)
+    {
+        $this->taille = $taille;
+    }
+    
     function setIddos($iddos)
     {
         $this->iddos = $iddos;

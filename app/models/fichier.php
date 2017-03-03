@@ -4,6 +4,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
  * Description of fichier
  *
@@ -21,6 +22,7 @@ class fichier extends Model
     private $date;
     private $taille;
     private $extension;
+    private $type;
     private $iduser;
 
     /*
@@ -60,6 +62,11 @@ class fichier extends Model
     function getExtension()
     {
         return $this->extension;
+    }
+
+    function getType()
+    {
+        return $this->type;
     }
 
     function getIduser()
@@ -103,6 +110,11 @@ class fichier extends Model
     function setExtension($extension)
     {
         $this->extension = $extension;
+    }
+
+    function setType($type)
+    {
+        $this->type = $type;
     }
 
     function setIduser($iduser)

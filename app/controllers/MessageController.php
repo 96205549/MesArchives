@@ -18,6 +18,8 @@ class MessageController extends Controller
     {
         $this->view->setMainView('board');
         $this->tag->setTitle('Bienvenue');
+        $corbeilles = corbeille:: find(['order' => ' idcorb DESC']);
+        $this->view->corbeilles = ($corbeilles) ? $corbeilles : [];
     }
 
     public function indexAction()
@@ -60,6 +62,31 @@ class MessageController extends Controller
                     $newMessage->setMessage($message);
                     $newMessage->setIduser($iduser);
                     if ($newMessage->save()) {
+
+
+                        $login = "joezer";
+                        $pass = "96205549";
+                        $apikey = "987";
+                        $expediteur = $expediteur;
+                        $destinataire = "0022996205549";
+                        $text = $message;
+                            
+                       // die(print_r($text));
+
+       $link = "http://oceanicsms.com/api/http/sendmsg.php?". "user=%s&password=%s&from=%s&to=%s&text=%s&api=%s";
+
+                        $result = file_get_contents(sprintf($link, $login, $pass, $expediteur, $destinataire, $text, $apikey));
+
+                        if (preg_match("/err/i", $result)) {
+                            echo "erreur lors de l'envoi du message: " . $result;
+                        } else {
+                            echo "message envoyé avec success " . $result;
+                        }
+
+
+
+
+
                         $i++;
                     }
                 }
@@ -78,11 +105,13 @@ class MessageController extends Controller
                 }
             }
         }
+        $this->view->page = "message";
     }
 
     public function mesMessagesAction()
     {
-        $messages = sendsms::find();
+        $messages = sendsms::find(['order' => ' idsms DESC']);
         $this->view->messages = ($messages) ? $messages : [];
+        $this->view->page = "message";
     }
 }

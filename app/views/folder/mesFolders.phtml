@@ -4,30 +4,45 @@ if(!isset($dossiers)){
 }
 ?>
 <div class="contain">
-    <h4 class="text-info">Mes Dossiers</h4>
+    <h4 class="text-warning">Mes Dossiers</h4>
+    <div class="clearfix">&nbsp;</div>
+    <div class="col-md-12 row notification">
+        <?php if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+            <div><p><?php $this->flashSession->output() ?></p></div>
+        <?php endif; ?>
+    </div>
     <div class="clearfix">&nbsp;</div>
     <div class="row">
         <div class="col-md-12">
-           <table class="table table-responsive table-striped">
+           <table class="table table-responsive table-striped table-bordered table-hover ui-datatable" 
+                    data-global-search="false"
+                    data-length-change="true"
+                    data-info="true"
+                    data-paging="true"
+                    data-page-length="10"
+                    >
+                <thead class="table-responsive">
                 <tr class="table-striped">
-                    <td> </td>
-                    <td><b>N&deg;</b></td>
-                    <td><b>Nom dossier</b></td>
-                    <td><b>file(s)</b></td>
-                    <td align='center'><b>ouvrir</b></td>
-                    <td align='center'><b>supprimer</b></td>
+                    <th></th>
+                    <th><b>N&deg;</b></th>
+                    <th data-filterable="text" data-sortable="true"><b>Nom dossier</b></th>
+                    <th><b>file(s)</b></th>
+                    <th align='center'><b>ouvrir</b></th>
+                    <?php if($this->session->get('sup')=="1"): ?> <th align='center'><b>supprimer</b></th><?php endif; ?>
                 </tr>
+                </thead>
+                <tbody class="table-responsive">
                 <?php $i=0; foreach ($dossiers as $doc): $i++ ?>
                 <tr class="table-striped">
-                    <td><img src="../public/img/folder.jpg" width="20" height="20"></td>
-                    <td><b><?= $i ?></b></td>
-                    <td><?= $doc->nomdos ?></td>
+                    <td><input type="checkbox"></td>
+                    <td><b><?= $i ?> &nbsp;<i class="fa fa-folder-open text-warning"></i></b></td>
+                    <td ><?= $doc->nomdos ?></td>
                     <td><?= "(".count($doc->fichier).")" ?></td>
-                    <td align="center"><a href="#"><span class="glyphicon glyphicon-eye-open text-primary"></span></a></td>
-                    <td align="center"><span class="glyphicon glyphicon-trash text-danger"></span></td>
+                     <td align="center"><a href="openFolder?id=<?= $doc->iddos ?>"><span class="glyphicon glyphicon-eye-open text-primary"></span></a></td>
+                     <?php if($this->session->get('sup')=="1"): ?> <td align="center"><a href="deleteFolder?id=<?= $doc->iddos ?>" data-confirm="<?= $doc->nomdos ?>"><span class="glyphicon glyphicon-trash text-danger"></span></a></td><?php endif; ?>
                 </tr>
                 <?php endforeach; ?>
-               
+                </tbody>
             </table>
         </div>
     </div>

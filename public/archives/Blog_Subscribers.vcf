@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION;TYPE=WORK:3.0
+FN;CHARSET=UTF-8:Florian Dorfbauer
+N;CHARSET=UTF-8:Florian Dorfbauer;;;;
+PROFILE:VCARD
+ADR;CHARSET=UTF-8:;;Industriezeile 35;Linz;;4020;Austria
+EMAIL:contact@usersnap.com
+ORG:Usersnap GmbH
+URL:http://usersnap.com/blog/
+END:VCARD

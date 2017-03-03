@@ -18,7 +18,8 @@ class ContactController extends controller
     {
         $this->view->setMainView('board');
         $this->tag->setTitle('Bienvenue');
-       
+        $corbeilles = corbeille:: find(['order' => ' idcorb DESC']);
+        $this->view->corbeilles = ($corbeilles) ? $corbeilles : [];
     }
 
     public function indexAction()
@@ -64,6 +65,7 @@ class ContactController extends controller
 
         $groupes = groupe::find();
         $this->view->groupes = $groupes;
+        $this->view->page = "contact";
     }
 
     public function newGroupeAction()
@@ -76,6 +78,7 @@ class ContactController extends controller
             if (empty($groupe)) {
                 $this->flashSession->error("Veuillez renseigner le nom du groupe");
                 $this->response->redirect("contact/newContact");
+                
             } else {
                 $newgroup = new groupe();
 
@@ -84,11 +87,13 @@ class ContactController extends controller
                 if ($newgroup->save()) {
                     $this->flashSession->success("Un nouveau groupe a ete creer avec succes");
                     $this->response->redirect("contact/newContact");
+                    
                 } else {
                     $this->flashSession->error("Echec le groupe n&apos; a pas pu etre creer");
                     $this->response->redirect("contact/newContact");
                 }
             }
+            $this->view->page = "contact";
         }
         if ($this->request->isAjax()) {
             $reponse = ["msg" => NULL, "success" => FALSE, "id" => NULL];
@@ -119,7 +124,39 @@ class ContactController extends controller
 
     public function updateGroupeAction()
     {
-        if ($this->request->isPost()) {
+        $id = $this->request->get("id");
+        ((int) $id) ? $id = $this->request->get('id') : $this->response->redirect("contact/newContact");
+        $getGroupe = groupe::findFirstByIdgroupe($id);
+        if($getGroupe == FALSE){
+            $this->response->redirect("contact/newContact");
+        }
+        $groupes = groupe::find();
+        $this->view->groupes = $groupes;
+        $this->view->getGroupe = $getGroupe;
+        $this->view->page = "contact";
+        
+        if(!$this->request->isAjax() && $this->request->isPost()){
+            $id= $this->request->getPost("idgroup");
+            $nomgroup= $this->request->getPost("groupname");
+            
+             $group = groupe::findFirstByIdgroupe($id);
+
+            if ($group) {
+                $group->nomgroupe = $nomgroup;
+                $group->iduser = $this->session->get('userid');
+
+                if ($group->update()) {
+                    //$this->disable();
+                   $this->flashSession->success("le groupe de contact a &eacute;t&eacute; modifi&eacute; avec succ&egrave;");
+                    $this->response->redirect("contact/updateGroupe?id=".$id);
+                } else {
+                    $this->flashSession->error("Echec de modification");
+                    $this->response->redirect("contact/updateGroupe?id=".$id);
+                }
+            }
+        }
+
+        if ($this->request->isAjax()) {
             $reponse = ["success" => false, "msg" => null, "id" => null];
 
             $id = $this->request->getPost('upid');
@@ -150,29 +187,52 @@ class ContactController extends controller
     public function deleteGroupeAction()
     {
         if (!$this->request->isAjax()) {
-            return null;
-        }
-        $reponse = ["success" => false, "msg" => null];
-        $id = $this->request->get('id');
-        $groupe = groupe::findFirstByIdgroupe($id);
-        if($groupe == TRUE){
-            $membres= contact::find(["idgroupe=:val:","bind"=>["val"=>$groupe->idgroupe]]);
-            if($membres){
-                foreach ($membres as $mb) {
-                    $del= $mb->delete();
+
+            $id = $this->request->get('id');
+            ((int) $id) ? $id = $this->request->get('id') : $this->response->redirect("contact/newContact");
+             $groupe = groupe::findFirstByIdgroupe($id);
+            if ($groupe == TRUE) {
+                 $membres = contact::find(["idgroupe=:val:", "bind" => ["val" => $groupe->idgroupe]]);
+                if ($membres) {
+                    foreach ($membres as $mb) {
+                        $del = $mb->delete();
+                    }
+                }
+                if ($groupe->delete()) {
+                    $this->flashSession->success("le groupe de contact a &eacute;t&eacute; supprim&eacute; avec succ&egrave;");
+                    $this->response->redirect("contact/newContact");
+                   
+                } else {
+                    $this->flashSession->error("le groupe de contact que vous &eacute;ssayez de supprim&eacute; a &eacute;chou&eacute;");
+                   $this->response->redirect("contact/newContact");
+                    
                 }
             }
-        if ( $groupe->delete()) {
-            $reponse["msg"] = "le groupe a &eacute;t&eacute; supprimer avec succ&egrave;s";
+            
+            
+        }
+        if ($this->request->isAjax()) {
+            $reponse = ["success" => false, "msg" => null];
+            $id = $this->request->get('id');
+            $groupe = groupe::findFirstByIdgroupe($id);
+            if ($groupe == TRUE) {
+                $membres = contact::find(["idgroupe=:val:", "bind" => ["val" => $groupe->idgroupe]]);
+                if ($membres) {
+                    foreach ($membres as $mb) {
+                        $del = $mb->delete();
+                    }
+                }
+                if ($groupe->delete()) {
+                    $reponse["msg"] = "le groupe a &eacute;t&eacute; supprimer avec succ&egrave;s";
 
-            $reponse["success"] = true;
-        } else {
-            $reponse["msg"] = "echec de suppression";
+                    $reponse["success"] = true;
+                } else {
+                    $reponse["msg"] = "echec de suppression";
+                }
+            }
+            return json_encode($reponse);
         }
     }
-        return json_encode($reponse);
-    }
-    
     
     /*
      * gestions des contacts
@@ -182,6 +242,7 @@ class ContactController extends controller
     {
         $contacts = contact:: find();
         $this->view->contacts = $contacts;
+        $this->view->page = "contact";
     }
 
     public function updateAction()
@@ -192,7 +253,10 @@ class ContactController extends controller
         }
 
         $oldContact = contact::findFirstById($id);
-        $this->view->contact = $oldContact;
+        if ($oldContact == FALSE) {
+            return $this->response->redirect('contact/newContact');
+        }
+        $this->view->contact = ($oldContact) ? $oldContact : [];
 
         if ($this->request->isPost()) {
             $fulname = $this->request->getPost("fulname");
@@ -226,6 +290,7 @@ class ContactController extends controller
         }
         $groupes = groupe::find();
         $this->view->groupes = $groupes;
+        $this->view->page = "contact";
     }
 
     public function deleteAction()
@@ -244,5 +309,6 @@ class ContactController extends controller
             return $this->response->redirect("contact/mesContacts");
         }
         $this->response->redirect("contact/newContact");
+        $this->view->page = "contact";
     }
 }

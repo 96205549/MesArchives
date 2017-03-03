@@ -1,0 +1,5 @@
+ID	Destination Network	Subnet Mask	Gateway	Interface
+1	41.86.231.80	255.255.255.240	0.0.0.0	WAN
+2	192.168.0.0	255.255.255.0	0.0.0.0	LAN & WLAN
+3	239.0.0.0	255.0.0.0	0.0.0.0	LAN & WLAN
+4	0.0.0.0	0.0.0.0	41.86.231.81	WAN

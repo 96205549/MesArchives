@@ -1,14 +1,25 @@
 <!DOCTYPE html>
+<?php
+if(!isset($page)){
+ $page = "dash";
+}
+if(!isset($corbeilles)){
+ $corbeilles = [];
+}
+//die(print_r($page));
+
+?>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Phalcon PHP Framework</title>
+        <title>ElectroArchives</title>
         <link href="<?= $this->url->getBaseUri(); ?>public/css/style.css" rel="stylesheet">
         <link rel="stylesheet" href="<?= $this->url->getBaseUri(); ?>public/vendor/bootstrap/dist/css/bootstrap.css">
         <link href="<?= $this->url->getBaseUri(); ?>public/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?= $this->url->getBaseUri(); ?>public/css/dataTables.bootstrap.css" rel="stylesheet">
         <link href="<?= $this->url->getBaseUri(); ?>public/vendor/font-awesome/css/font-awesome.css" rel="stylesheet">
     </head>
     <body class="bod">
@@ -22,7 +33,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>                        
                 </button>
-                <a class="navbar-brand" href="#">Mes Archives</a>
+                <a class="navbar-brand" href="">ElectroArchives</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
@@ -30,10 +41,10 @@
                         <span class="glyphicon glyphicon-user"></span> <?= $this->session->get('pseudo');  ?>&nbsp;<i class="fa fa-caret-down"></i></a>
                         <ul class="dropdown-menu sous-menu" role="menu">
                             <li>
-                                <a href="#">&nbsp; Mon profile</a>
+                                <a href="<?= $this->url->get("dashboard/profile?id=".$this->session->get('userid')); ?>"><span class="glyphicon glyphicon-user text-warning"></span>&nbsp; Mon profile</a>
                             </li> 
                             <li>
-                                <a href="<?= $this->url->get("session/logout"); ?>">&nbsp; D&eacute;connexion</a>
+                                <a href="<?= $this->url->get("session/logout"); ?>"><span class="glyphicon glyphicon-log-out text-warning"></span>&nbsp; D&eacute;connexion</a>
                             </li>                    
                         </ul>
                     </li>
@@ -44,8 +55,10 @@
         </div>
     </nav>
         <div class="container-fuild">
-        <div class="col-sm-2 bloc-right fixed" > 
-         
+        <div class="row-fluid col-md-2 block-ga"> 
+        <div class="bloc-right"> 
+        <div class="xfixed"> 
+            <!--span class="clearfix">&nbsp;</span-->
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -63,7 +76,7 @@
                             </span> Dossier</a>
                         </h4>
                     </div>
-                    <div id="collapseOne" class="panel-collapse collapse ">
+                    <div id="collapseOne" class="panel-collapse collapse <?= ($page == "folder")? "in active" : "" ?> ">
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
@@ -83,8 +96,8 @@
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a href="<?= $this->url->get("file/newFile"); ?>"><span class="glyphicon glyphicon-file">
+                        <h4 class="panel-title ">
+                            <a href="<?= $this->url->get("file/newFile"); ?>"><span class="glyphicon glyphicon-file text-warning">
                             </span> Fichiers </a>
                         </h4>
                     </div>
@@ -93,21 +106,21 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a href="<?= $this->url->get("zip/newArchive"); ?>"><span class="glyphicon glyphicon-briefcase">
+                            <a href="<?= $this->url->get("zip/newArchive"); ?>"><span class="glyphicon glyphicon-briefcase text-warning">
                             </span> Archives</a>
                         </h4>
                     </div>
                     
                 </div>
-
+                <?php if ($this->session->get('cont') == 1) { ?>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-erase">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-erase text-warning">
                             </span> Carnet d&apos; adresse</a>
                         </h4>
                     </div>
-                    <div id="collapseFour" class="panel-collapse collapse">
+                    <div id="collapseFour" class="panel-collapse collapse <?= ($page == "contact")? "in active" : "" ?>">
                         <div class="panel-body">
                             <table class="table table-responsive table-triped">
                                 <tr class="table table-triped">
@@ -124,16 +137,17 @@
                         </div>
                     </div>
                 </div>
-
+                <?php } ?>
+                
                 <?php if ($this->session->get('sms') == 1) { ?>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><span class="glyphicon glyphicon-envelope">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><span class="glyphicon glyphicon-envelope text-warning">
                             </span> Messagerie sms</a>
                         </h4>
                     </div>
-                    <div id="collapseFive" class="panel-collapse collapse">
+                    <div id="collapseFive" class="panel-collapse collapse <?= ($page == "message")? "in active" : "" ?>">
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
@@ -155,11 +169,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseik"><span class="glyphicon glyphicon-user">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseik"><span class="glyphicon glyphicon-user text-warning">
                             </span>R&ocirc;le/Permission</a>
                         </h4>
                     </div>
-                    <div id="collapseik" class="panel-collapse collapse">
+                    <div id="collapseik" class="panel-collapse collapse <?= ($page == "permission")? "in active" : "" ?>">
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
@@ -169,7 +183,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-cloud-upload"></span><a href="<?= $this->url->get("profile/newProfile"); ?>"> profil</a>
+                                        <span class="fa fa-user-circle"></span><a href="<?= $this->url->get("profile/newProfile"); ?>"> profil</a>
                                     </td>
                                 </tr>     
                             </table>
@@ -183,11 +197,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix"><span class="glyphicon glyphicon-cog">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix"><span class="glyphicon glyphicon-cog text-danger">
                             </span> Param&egrave;tres</a>
                         </h4>
                     </div>
-                    <div id="collapseSix" class="panel-collapse collapse">
+                    <div id="collapseSix" class="panel-collapse collapse <?= ($page == "setting")? "in active" : "" ?>">
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
@@ -211,8 +225,8 @@
                  <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a href="<?= $this->url->get("dashboard/corbeille"); ?>"><span class="glyphicon glyphicon-trash">
-                            </span> Corbeille(50)</a>
+                            <a href="<?= $this->url->get("dashboard/corbeille"); ?>"><span class="glyphicon glyphicon-trash text-warning">
+                            </span> Corbeille <?= "(".sizeof($corbeilles).")" ?></a>
                         </h4>
                     </div>      
                 </div>
@@ -220,6 +234,8 @@
             </div>
        
             
+        </div>     
+        </div>     
         </div>     
            
         <div class="col-sm-10 bloc-left"> 
@@ -237,7 +253,17 @@
         <script src="<?= $this->url->getBaseUri(); ?>public/vendor/bootstrap/dist/js/bootstrap.min.js"></script>      
         <script src="<?= $this->url->getBaseUri(); ?>public/js/delete.js"></script>      
         <!--script src="<?= $this->url->getBaseUri(); ?>vendor/ckeditor/ckeditor/ckeditor.js"></script-->
-        <script src="<?= $this->url->getBaseUri(); ?>public/js/archives.js"></script>      
+        <script src="<?= $this->url->getBaseUri(); ?>public/js/archives.js"></script>  
+        
+        <script src="<?= $this->url->getBaseUri(); ?>public/js/jquery.slimscroll.min.js"></script>
+        
+        <script src="<?= $this->url->getBaseUri(); ?>public/js/jquery.dataTables.min.js"></script>      
+        <script src="<?= $this->url->getBaseUri(); ?>public/js/dataTables.bootstrap.js"></script>      
+        <script src="<?= $this->url->getBaseUri(); ?>public/js/datatables-helper.js"></script>  
+        <!-- script du tri d'un tableau  -->
+        <script src="<?= $this->url->getBaseUri(); ?>public/js/mvpready-core.js"></script>
+        <script src="<?= $this->url->getBaseUri(); ?>public/js/mvpready-helpers.js"></script>
+        <script src="<?= $this->url->getBaseUri(); ?>public/js/mvpready-vendeur.js"></script>
     </body>
 </html>
 

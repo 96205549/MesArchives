@@ -1,0 +1,56 @@
+<?php
+if (!isset($docFile)) {
+    $docFile = [];
+}
+?>
+<div class="contain">
+    <h4 class="text-warning">Modification de fichier</h4>
+    <div class="clearfix">&nbsp;</div>
+    <form method="post" action="updateFile?id=<?= $docFile->idfile ?>" enctype="multipart/form-data">
+        <div class="row">
+          
+            <div class="col-md-12">
+                <span class="clearfix">&nbsp;</span>
+                <div class="col-md-12">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td colspan="4">
+                                <span class="col-md-6"><input type="text" name="descfile" value="<?= $docFile->description ?>" class="form-control" placeholder="description fichier" required=""></span>
+                                <span class="col-md-4"><input type="file" name="fichier[]"></span>
+                                <span class="col-md-2" id="bloc-button">
+                                    <a href="#" class="btn btn-default btn-xs" >
+                                        <i class="fa fa-file text-info"></i> &nbsp;<?= $docFile->nomfile ?>
+                                    </a>
+                                </span><br>
+                            </td>
+                        </tr>                               
+                    </table> 
+                    <table class="table table-responsive"id="tableau_doc" >
+                        <tr>
+                            <td colspan="4">
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="row">
+                    <span class="col-md-8">
+                        &nbsp;
+                    </span>
+                    <span class="col-md-4">
+                        <a href="newFile" class="btn btn-default btn-sm"><i class="fa fa-backward text-warning"></i>&nbsp; Listes des fichiers</a>
+                        <button class="btn btn-primary fa fa-check " type="submit" >&nbsp;Modifier</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="clearfix">&nbsp;</div>
+    <div class="col-md-12 row notification">
+        <?php if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+            <div><p><?php $this->flashSession->output() ?></p></div>
+        <?php endif; ?>
+    </div>
+    <div class="clearfix">&nbsp;</div>
+   
+</div>

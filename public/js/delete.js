@@ -11,7 +11,7 @@ $(function () {
 
         if (!$('#dataConfirmModal').length) {
             $('body').append(
-                    '<div id="dataConfirmModal" class="modal" role="dialog" aria-labelledby="dataConfirmLabel" aria-hidden="true">'+
+                    '<div id="dataConfirmModal" class="modal reveal-modal" role="dialog" aria-labelledby="dataConfirmLabel" aria-hidden="true">'+
                         '<div class="modal-dialog">'+
                             '<div class="modal-content">'+
                                 '<div class="modal-header">'+
@@ -34,3 +34,5 @@ $(function () {
         return false;
     });
 });
+
+

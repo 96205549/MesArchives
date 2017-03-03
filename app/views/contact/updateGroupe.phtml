@@ -1,0 +1,100 @@
+<?php
+if (!isset($groupes)) {
+    $groupes = [];
+}
+if (!isset($getGroupe)) {
+    $getGroupe = [];
+}
+
+?>
+<div class="contain">
+    <h4 class="text-warning">Groupe de contact</h4>
+    <div class="clearfix">&nbsp;</div>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="col-md-3" data-toggle="collapse" data-target="#demo1" style="cursor: alias;"><a href="#"><i class="fa fa-plus"></i> Cr&eacute;er un groupe de contact</a></span>
+            <!--span class="col-md-offset-4 col-md-4" ><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-users"></i> Mes groupes de contact</a></span-->
+        </div>
+        <div id="demo1" class="collapse col-md-12">
+            <span class="clearfix">&nbsp;</span>
+            <div class="col-md-12">
+                <form method="post" id="newGroupe" action="newGroupe">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td colspan="4">
+                                <span class="col-md-4"><input type="text" class="form-control" id="nomgroupe" placeholder="Nom du groupe" name="nomgroupe"></span>
+                                <span class="col-md-2">
+                                    <button type="submit" class="btn btn-primary btn-sm" >
+                                        <i class="fa fa-check"></i> &nbsp;Enregistrer
+                                    </button>
+                                </span><br>
+
+                            </td>
+                        </tr>                               
+                    </table> 
+                </form>
+            </div>  
+        </div>
+    </div>
+    <div class="clearfix">&nbsp;</div>
+    
+    <div class="col-md-12 row notification">
+        <?php if (sizeof($this->flashSession->getMessages(NULL, false)) > 0): ?>
+            <div><p><?php $this->flashSession->output() ?></p></div>
+        <?php endif; ?>
+    </div>
+    <div class="row">      
+        <span class="clearfix">&nbsp;</span>
+
+        <div class="tab-content col-md-12">
+
+            <div class="tab-body">
+                <form method="post" action="updateGroupe">
+                    <div class="row bloc-edit-group">
+                        <span class="col-md-9"> <input type="text" id="groupname" name="groupname" value="<?= $getGroupe->nomgroupe ?>" class="form-control"></span>
+                        <span class="col-md-3"> <button class="btn btn-default"><i class="fa fa-pencil"></i>&nbsp;Valider</button></span>
+                        <span class="col-md-12"> <input type="hidden"  name="idgroup" value="<?= $getGroupe->idgroupe ?>" class="form-control"></span>
+                    </div>
+                </form>
+                <div class="clearfix">&nbsp;</div>
+                <div class="col-md-12 text-primary" style="margin-top:10px;" id="notification"> </div>
+                <div class="clearfix">&nbsp;</div>
+                <div class="row col-md-12">
+                    <div class="clearfix">&nbsp;</div>
+
+                    <div class="clearfix">&nbsp;</div>
+                    <table class="table-responsive table-striped col-md-12 tabl-groupe">
+                        <?php foreach ($groupes as $groupe): ?>
+                            <tr class="table-responsive table-striped">
+                                <td class="col-md-8">
+                                    <?= $groupe->nomgroupe ?></td>
+                                <td class="col-md-2">
+                                    <a href="updateGroupe?id=<?= $groupe->idgroupe ?>" id="<?= $groupe->idgroupe ?>" name=" <?= $groupe->nomgroupe ?>" class="btn btn-sm btn-default"><i class="fa fa-pencil"></i>&nbsp;modifier</a>
+                                </td>
+                                <td class="col-md-2">
+                                    <a href="<?= $this->url->get("contact/deleteGroupe?id=" . $groupe->idgroupe) ?>" id="<?= $groupe->idgroupe ?>" data-confirm="<?= $groupe->nomgroupe ?>" class="btn btn-sm btn-danger "><i class="fa fa-remove"></i>&nbsp; supprimer</a>
+                                </td>
+                            </tr>  
+                            <tr><td colspan="3">&nbsp;</td></tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="clearfix">&nbsp;</div>
+
+
+
+
+
+
+    <!-- Modal content-->
+
+
+
+
+
+</div>
+

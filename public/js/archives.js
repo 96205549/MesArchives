@@ -129,6 +129,34 @@ $(document).ready(function () {
     });
 
 
+/*
+ * code de formatage de la corbeille
+ */
+
+$('.formatDrash').click(function(ev){
+    ev.preventDefault();
+        
+    $.ajax({
+                url: $(this).attr('href'),
+                //type: $(this).attr('method'),
+                data: $(this).serialize(),
+                dataType: "json",
+            }).success(function (data) {
+                var isSuccess = data.success !== undefined ? data.success : false;
+                var msg = data.msg !== undefined ? data.msg : "";
+               
+                if (isSuccess) {
+                    $(".conten-corb").empty();
+                    $(".conten-corb").append("<tr><td colspan='7' align='center' height='50%'>votre corbeille est vide</td></tr>").add();
+                   
+                } else if (msg.length > 0) {
+                    $(".notification").html("<div class='alert alert-danger col-md-12'>" + msg + "</div>");
+                }
+            }).error(function (xhr) {
+                alert(xhr.responseText);
+                console.log(xhr.responseText);
+            });
+});
 
 
 });

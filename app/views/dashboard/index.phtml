@@ -1,44 +1,80 @@
+<?php
+ if(!isset($folders)){
+     $folders=[];
+ }
+ if(!isset($files)){
+     $files=[];
+ }
+ if(!isset($zip)){
+     $zip=[];
+ }
+ if(!isset($logs)){
+     $logs=[];
+ }
+?>
 <div class="contain">
-    <h5 class="text-primary"><u>Dasboard/ Plateforme electronique des archives</u></h5>
-
+    <span class="col-md-12"><h4 class="text-warning">Dasboard/</h4><h5 class="text-info"><u> Plateforme electronique des archives</u></h5></span>
     <div class="row">
         <div class="col-md-12">
             <div>&nbsp;</div>
             <div class="col-md-offset-1 col-md-3 cercle">
                 <h4 class="text-primary">Dossier</h4><br>
-                <img src="../public/img/dos.png" width="40%" height="40%"><br>
+                <i class="fa fa-folder-open-o fa-5x text-warning"></i><br>
                 <b class="text-warning">Utilisations des donn&eacute;es</b><br><br>
-                <b class="text-info">105 dossier(s)</b>
+                <b class="text-info"><?= $folders->count() ?> dossier(s)</b>
             </div>
 
             <div class="col-md-offset-1 col-md-3 cercle">
                 <h4 class="text-primary">fichier</h4><br>
-                <img src="../public/img/file.png" width="40%" height="40%"><br>
+               <i class="fa fa-file fa-5x text-warning"></i><br>
                 <b class="text-warning">Utilisations des donn&eacute;es</b><br><br>
-                <b class="text-info">1004 fichier(s)</b>
+                <b class="text-info"><?= $files->count() ?> fichier(s)</b>
             </div>
             <div class="col-md-offset-1 col-md-3 cercle">
                 <h4 class="text-primary">archives</h4><br>
-                <img src="../public/img/zip.png" width="40%" height="40%"><br>
+                <i class="fa fa-file-archive-o fa-5x text-warning"></i><br>
                 <b class="text-warning">Utilisations des donn&eacute;es</b><br><br>
-                <b class="text-info">40 archive(s)</b>
+                <b class="text-info"><?= $zip->count() ?> archive(s)</b>
             </div>
         </div>
     </div>
     <div class="clearfix">&nbsp;</div>
     <div class="clearfix">&nbsp;</div>
     <div class="row">
-        <div class="col-md-6">           
+        <div class="col-md-4">           
             <div class="panel panel-transparent">
                 <div class="panel-body no-padding">
                     <div id="portlet-circular-minimal" class="panel panel-default">
                         <div class="panel-heading ">
-                            <div class="panel-title">Portlet Title
+                            <div class="panel-title"><i class="fa fa-info-circle text-info"></i>&nbsp;Information syst&egrave;me
                             </div>
                         </div>
                         <div class="panel-body">
-                            <h3>
-                                <span class="semi-bold">Minimal</span> Portlet</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                           
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">           
+            <div class="panel panel-transparent">
+                <div class="panel-body no-padding">
+                    <div id="portlet-circular-minimal" class="panel panel-default">
+                        <div class="panel-heading ">
+                            <div class="panel-title"><i class="fa fa-desktop text-info"></i>&nbsp;&agrave; propos du constructeur?
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                         
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                </p>
+
                             <p>
                                 
                                 modifier===><?= $this->session->get('mod') ?><br>
@@ -57,42 +93,23 @@
             </div>
 
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="panel panel-transparent">
                 <div class="panel panel-warning no-padding">
                     <div class="panel-heading">Activit&eacute;es r&eacute;centes</div>
                     <div class="panel-body">
                         <table class="table table-responsive table-striped">
+                            
+                            <?php foreach ($logs as $value): ?>
                             <tr class="table table-striped">
-                                <td>cr&eacute;ation du dossier impot 2008</td>
+                                <td><?= $value->activite ?></td>
                             </tr>
-                            <tr class="table table-striped">
-                                <td>cr&eacute;ation du dossier impot 2009</td>
-                            </tr>
-                            <tr class="table table-striped">
-                                <td>cr&eacute;ation du dossier impot 2010</td>
-                            </tr>
-                            <tr class="table table-striped">
-                                <td>cr&eacute;ation du dossier impot 2011</td>
-                            </tr>
-                            <tr class="table table-striped">
-                                <td>cr&eacute;ation du dossier impot 2012</td>
-                            </tr>
-                            <tr class="table table-striped">
-                                <td>cr&eacute;ation du dossier impot 2013</td>
-                            </tr>
-                            <tr class="table table-striped">
-                                <td>cr&eacute;ation du dossier impot 2014</td>
-                            </tr>
-                            <tr class="table table-striped">
-                                <td>cr&eacute;ation du dossier impot 2015</td>
-                            </tr>
-                            <tr class="table table-striped">
-                                <td>cr&eacute;ation du dossier impot 2016</td>
-                            </tr>
+                            <?php endforeach; ?>
+                           
                         </table>
                     </div>
-
+                    <?php if(sizeof($logs)>6): ?><a href="">Voir plus</a><?php endif; ?>
+                    
                 </div>
             </div>
         </div>
